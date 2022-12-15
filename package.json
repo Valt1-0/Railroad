@@ -10,6 +10,7 @@
   "author": "valt",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "chalk": "^4.1.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

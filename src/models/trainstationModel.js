@@ -1,3 +1,4 @@
+const { Faker } = require('@faker-js/faker');
 const mongoose = require('mongoose')
 
 const Schema =  mongoose.Schema;
@@ -25,7 +26,8 @@ const TrainStationModel = new Schema({
     required: true,
   },
   image: {
-    type: String
+    type: String,
+    default: Faker.image.trains(),
   }
 
 });
