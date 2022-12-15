@@ -25,7 +25,12 @@ const TrainStationModel = new Schema({
     required: true,
   },
   image: {
-    
+    uri: {
+      type: String
+  },
+  path: {
+      type: String
+  },
   }
 
 });
