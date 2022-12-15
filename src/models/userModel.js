@@ -30,7 +30,7 @@ const UserModel = new Schema({
   },
   role: {
     type: String,
-    enum: ["Admin", "User"],
+    enum: ["Admin", "Employee", "User"],
     required: true,
   }
 
