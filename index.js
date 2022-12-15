@@ -1,10 +1,11 @@
 require("dotenv").config();
+const PORT = process.env.EXPRESS_PORT
 const dbConnect = require('./config/connectMongo')
 const express = require("express");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 const userRoutes = require("./src/routes/userRoutes")
-const PORT = process.env.EXPRESS_PORT
+const trainRoutes = require("./src/routes/trainRoutes")
 
 
 /**
@@ -29,6 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use('/users', userRoutes);
+app.use('/trains', trainRoutes);
 
 
 app.listen(PORT, () => {

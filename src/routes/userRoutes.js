@@ -47,11 +47,22 @@ router
 
             try {
                 req.props =  {};
+
+                if (req.body == "") {
+                    console.log('test');
+                }
+
+                if (req.body.role == 'User'){
+                    req.status(400).send(`You don't have permissions to see others users informations`)
+                }
+
                 if (req.query) for (let attrname in req.query) {
                     req.props[attrname] = req.query[attrname];
                 }
-                const users = await User.find(req.props);
-                res.status(200).send(users);
+
+                // const users = await User.find(req.props);
+                // res.status(200).send(users);
+                res.send();
 
             } catch (error) {
                 console.error(error);

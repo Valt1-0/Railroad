@@ -46,12 +46,12 @@ router
 
             try {
                 let email = req.body.email
-                let userExist = await User.findOne({email});
+                let userExist = await Train.findOne({email});
 
                 if (userExist) {
                     return res.status(400).json({ msg: 'User already exist'})
                 }
-                const user = new User({... req.body})
+                const user = new Train({... req.body})
                 await user.save();
                 res.send(user)
             } catch (error) {
@@ -70,7 +70,7 @@ router
             try {
                 console.log(req.query._id);
 
-                const user = await User.findByIdAndUpdate(req.query._id, { ...req.body});
+                const user = await Train.findByIdAndUpdate(req.query._id, { ...req.body});
                 res.send(user);
             } catch (error) {
                 console.log(error);
