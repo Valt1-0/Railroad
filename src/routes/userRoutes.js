@@ -2,45 +2,45 @@ const express = require('express');
 
 const router = express.Router();
 
-const User = require('../models/user')
+const User = require('../models/userModel')
 
 router
-    .post('/signup',
+    // .post('/signup',
 
-        async (req, res) => {
-            console.log(req.body)
+    //     async (req, res) => {
+    //         console.log(req.body)
 
-        const {
-            email,
-            isAdmin,
-            personnage
-        } = req.body
+    //     const {
+    //         email,
+    //         isAdmin,
+    //         personnage
+    //     } = req.body
 
-        try {
-            let user = await User.findOne({ email })
-            if (user){
-                return res.status(400).json({
-                    message: 'User already exist'
-                })
-            }
-            user = new User({
-                email,
-                isAdmin,
-                personnage
-            })
+    //     try {
+    //         let user = await User.findOne({ email })
+    //         if (user){
+    //             return res.status(400).json({
+    //                 message: 'User already exist'
+    //             })
+    //         }
+    //         user = new User({
+    //             email,
+    //             isAdmin,
+    //             personnage
+    //         })
 
-            await user.save();
-            const payload =  {
-                user: {
-                    id: user.id
-                }
-            }
-        } catch (error) {
+    //         await user.save();
+    //         const payload =  {
+    //             user: {
+    //                 id: user.id
+    //             }
+    //         }
+    //     } catch (error) {
 
-            console.error(error);
-            res.status(500).send('Erreur lors de la sauvegarde')
-        }
-    })
+    //         console.error(error);
+    //         res.status(500).send('Erreur lors de la sauvegarde')
+    //     }
+    // })
     .get("/find",
 
         async (req, res) => {
@@ -61,13 +61,13 @@ router
 
         }
     )
-    .delete("/deleteUser",
+    .delete("/delete",
 
         async (req, res) => {
-            console.log(req.query);
+            console.log(req.body);
             try {
-                if (req.query.isAdmin == 'true') {
-                    const user = await User.deleteOne({ "email": req.query.email})
+                if (req.body.role == 'Admin') {
+                    const user = await User.deleteOne({ "email": req.body.email})
                     res.send(user)
                 }
             } catch (error) {
@@ -104,7 +104,7 @@ router
         async (req, res) => {
 
             try {
-                console.log(req.query.id);
+                console.log(req.query._id);
 
                 const user = await User.findByIdAndUpdate(req.query._id, { ...req.body});
                 res.send(user);

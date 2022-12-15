@@ -3,7 +3,7 @@ const dbConnect = require('./config/connectMongo')
 const express = require("express");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
-// const articlesRoutes = require("./src/routes/articlesRoutes")
+const userRoutes = require("./src/routes/userRoutes")
 const PORT = process.env.EXPRESS_PORT
 
 
@@ -28,7 +28,7 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// app.use('/articles', articlesRoutes);
+app.use('/users', userRoutes);
 
 
 app.listen(PORT, () => {

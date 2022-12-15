@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const MONGODB_URI = process.env.MONGODB_URI;
 
 module.exports.connect = async (callback) => {
+    mongoose.set("strictQuery", false);
     mongoose.connect(MONGODB_URI, error => {
             if (error) {
                 console.error('Connection failed')
