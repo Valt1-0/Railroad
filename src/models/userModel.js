@@ -7,10 +7,9 @@ const Schema =  mongoose.Schema;
 **/
 
 const UserModel = new Schema({
-  // _id: {
-  //   type: Number,
-  //   required: true,
-  // },
+  id: {
+    type: Number,
+  },
   pseudo: {
     type: String,
     unique: true,

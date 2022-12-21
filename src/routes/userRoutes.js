@@ -1,133 +1,237 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
 
-const User = require('../models/userModel')
+const User = require("../models/userModel");
+
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 router
-    // .post('/signup',
+  // .post('/signup',
 
-    //     async (req, res) => {
-    //         console.log(req.body)
+  //     async (req, res) => {
+  //         console.log(req.body)
 
-    //     const {
-    //         email,
-    //         isAdmin,
-    //         personnage
-    //     } = req.body
+  //     const {
+  //         email,
+  //         isAdmin,
+  //         personnage
+  //     } = req.body
 
-    //     try {
-    //         let user = await User.findOne({ email })
-    //         if (user){
-    //             return res.status(400).json({
-    //                 message: 'User already exist'
-    //             })
-    //         }
-    //         user = new User({
-    //             email,
-    //             isAdmin,
-    //             personnage
-    //         })
+  //     try {
+  //         let user = await User.findOne({ email })
+  //         if (user){
+  //             return res.status(400).json({
+  //                 message: 'User already exist'
+  //             })
+  //         }
+  //         user = new User({
+  //             email,
+  //             isAdmin,
+  //             personnage
+  //         })
 
-    //         await user.save();
-    //         const payload =  {
-    //             user: {
-    //                 id: user.id
-    //             }
-    //         }
-    //     } catch (error) {
+  //         await user.save();
+  //         const payload =  {
+  //             user: {
+  //                 id: user.id
+  //             }
+  //         }
+  //     } catch (error) {
 
-    //         console.error(error);
-    //         res.status(500).send('Erreur lors de la sauvegarde')
-    //     }
-    // })
-    .get("/find",
+  //         console.error(error);
+  //         res.status(500).send('Erreur lors de la sauvegarde')
+  //     }
+  // })
+  .get(
+    "/find",
 
-        async (req, res) => {
+    async (req, res) => {
+      // try {
+      //     req.props =  {};
 
-            try {
-                req.props =  {};
+      //     if (req.body == "{}") {
+      //         console.log('test');
+      //     }
 
-                if (req.body == "") {
-                    console.log('test');
-                }
+      //     console.log(req.body)
 
-                if (req.body.role == 'User'){
-                    req.status(400).send(`You don't have permissions to see others users informations`)
-                }
+      //     if (req.body.role == 'User'){
+      //         req.status(400).send(`You don't have permissions to see others users informations`)
+      //     } else {
 
-                if (req.query) for (let attrname in req.query) {
-                    req.props[attrname] = req.query[attrname];
-                }
+      //         if (req.query) for (let attrname in req.query) {
+      //             req.props[attrname] = req.query[attrname];
+      //         }
 
-                // const users = await User.find(req.props);
-                // res.status(200).send(users);
-                res.send();
+      //         const users = await User.find(req.props);
+      //         res.status(200).send(users);
+      //         res.send();
 
-            } catch (error) {
-                console.error(error);
-                res.status(400).send('Don\'t Exist');
+      //     }
+
+      // } catch (error) {
+      //     console.error(error);
+      //     res.status(400).send('Don\'t Exist');
+      // }
+
+      try {
+        console.log(req.user);
+
+        if (req.body.role !== "User" || req.body.role == "undefined") {
+          if (req.query)
+            for (let attrname in req.query) {
+              req.props[attrname] = req.query[attrname];
             }
 
-
+          // Utilisez le modèle de schéma pour récupérer tous les utilisateurs de la base de données
+          User.find(req.props, (err, users) => {
+            if (err) {
+              throw err;
+            } else {
+              res.send(users);
+            }
+          });
+        } else {
+          res.status(401).send({
+            message: "Vous n'avez pas la permission de voir cette route",
+          });
         }
-    )
-    .delete("/delete",
+      } catch (error) {
+        res.status(500).send(error);
+      }
+    }
+  )
+  .delete(
+    "/delete",
 
-        async (req, res) => {
-            console.log(req.body);
-            try {
-                if (req.body.role == 'Admin') {
-                    const user = await User.deleteOne({ "email": req.body.email})
-                    res.send(user)
+    async (req, res) => {
+      console.log(req.body);
+      try {
+        if (req.body.role == "Admin") {
+          const user = await User.deleteOne({ email: req.body.email });
+          res.send(user);
+        }
+      } catch (error) {
+        res.status(400).json({ msg: "You dont have the permission" });
+      }
+    }
+  )
+  .post(
+    "/add",
+
+    async (req, res) => {
+      try {
+        let email = req.body.email;
+        let userExist = await User.findOne({ email });
+
+        if (userExist) {
+          return res.status(400).json({ msg: "User already exist" });
+        }
+        const user = new User({ ...req.body });
+        await user.save();
+        res.send(user);
+      } catch (error) {
+        console.log(error);
+        res.status(400).json({ error });
+      }
+    }
+  )
+  .put(
+    "/update",
+
+    async (req, res) => {
+      try {
+        console.log(req.query._id);
+
+        const user = await User.findByIdAndUpdate(req.query._id, {
+          ...req.body,
+        });
+        res.send(user);
+      } catch (error) {
+        console.log(error);
+        res.status(400).json({ error });
+      }
+    }
+  )
+  .post(
+    "/login",
+
+    async (req, res) => {
+      // Recherchez l'utilisateur dans la base de données en utilisant l'e-mail envoyé dans la requête
+      User.findOne({ email: req.body.email }, (err, user) => {
+        if (err) {
+          res.status(500).send(err);
+        } else if (!user) {
+          res.status(401).send({ message: "E-mail ou mot de passe incorrect" });
+        } else {
+          // Vérifiez si le mot de passe envoyé dans la requête correspond au mot de passe hashé de l'utilisateur
+          bcrypt.compare(req.body.password, user.password, (err, result) => {
+            if (err) {
+              res.status(500).send(err);
+            } else if (!result) {
+              res
+                .status(401)
+                .send({ message: "E-mail ou mot de passe incorrect" });
+            } else {
+              // Générez un jeton JWT pour l'utilisateur
+              const token = jwt.sign(
+                { id: user.id, email: user.email, role: user.role },
+                process.env.JWT_SECRET,
+                { expiresIn: "1h" }
+              );
+              res.send({ token });
+            }
+          });
+        }
+      });
+    }
+  )
+  .post(
+    "/register",
+
+    async (req, res) => {
+      // Vérifiez si l'adresse e-mail est déjà utilisée
+      User.findOne({ email: req.body.email }, (err, user) => {
+        if (err) {
+          res.status(500).send(err);
+        } else if (user) {
+          res
+            .status(400)
+            .send({ message: "Cette adresse e-mail est déjà utilisée" });
+        } else {
+          // Hash le mot de passe de l'utilisateur
+          bcrypt.hash(req.body.password, 10, (err, hash) => {
+            if (err) {
+              res.status(500).send(err);
+            } else {
+              // Créez un nouvel utilisateur avec les données envoyées dans la requête et le mot de passe hashé
+              const newUser = new User({
+                id: req.body.id,
+                email: req.body.email,
+                pseudo: req.body.pseudo,
+                password: hash,
+              });
+              // Enregistrez l'utilisateur dans la base de données
+              newUser.save((err, user) => {
+                if (err) {
+                  res.status(500).send(err);
+                } else {
+                  // Générez un jeton JWT pour l'utilisateur
+                  const token = jwt.sign(
+                    { id: user.id, email: user.email, role: user.role },
+                    process.env.JWT_SECRET,
+                    { expiresIn: "1h" }
+                  );
+                  res.send({ token });
                 }
-            } catch (error) {
-                res.status(400).json({ msg: 'You dont have the permission'})
+              });
             }
+          });
         }
+      });
+    }
+  );
 
-    )
-    .post("/add",
-
-        async (req, res) => {
-
-            try {
-                let email = req.body.email
-                let userExist = await User.findOne({email});
-
-                if (userExist) {
-                    return res.status(400).json({ msg: 'User already exist'})
-                }
-                const user = new User({... req.body})
-                await user.save();
-                res.send(user)
-            } catch (error) {
-                console.log(error);
-                res.status(400).json({error})
-
-            }
-
-        }
-
-    )
-    .put("/update",
-
-        async (req, res) => {
-
-            try {
-                console.log(req.query._id);
-
-                const user = await User.findByIdAndUpdate(req.query._id, { ...req.body});
-                res.send(user);
-            } catch (error) {
-                console.log(error);
-                res.status(400).json({error})
-
-            }
-
-        }
-
-    )
-
-
-module.exports = router
+module.exports = router;
