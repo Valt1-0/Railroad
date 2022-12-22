@@ -25,7 +25,7 @@ const TrainModel = new Schema({
     required: true,
   },
   time_of_departure: {
-    type: Date,
+    type: String,
     required: true,
   }
 

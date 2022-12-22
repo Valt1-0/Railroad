@@ -1,11 +1,9 @@
 const express = require("express");
-
 const router = express.Router();
-
 const User = require("../models/userModel");
-
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const isAuth = require('../middleware/auth')
 
 router
   // .post('/signup',
@@ -45,45 +43,27 @@ router
   //     }
   // })
   .get(
-    "/find",
+    "/find",isAuth,
 
     async (req, res) => {
-      // try {
-      //     req.props =  {};
-
-      //     if (req.body == "{}") {
-      //         console.log('test');
-      //     }
-
-      //     console.log(req.body)
-
-      //     if (req.body.role == 'User'){
-      //         req.status(400).send(`You don't have permissions to see others users informations`)
-      //     } else {
-
-      //         if (req.query) for (let attrname in req.query) {
-      //             req.props[attrname] = req.query[attrname];
-      //         }
-
-      //         const users = await User.find(req.props);
-      //         res.status(200).send(users);
-      //         res.send();
-
-      //     }
-
-      // } catch (error) {
-      //     console.error(error);
-      //     res.status(400).send('Don\'t Exist');
-      // }
 
       try {
-        console.log(req.user);
+        req.props = {};
 
-        if (req.body.role !== "User" || req.body.role == "undefined") {
+        console.log(req.user);
+        console.log(req.query.email);
+
+        if (!["Employee","Admin"].includes(req.user.role) && req.user.email !== req.query.email) {
+
+          return res.status(400).send("Vous n'avez pas la permission de voir cette route")
+
+        } 
+
           if (req.query)
-            for (let attrname in req.query) {
-              req.props[attrname] = req.query[attrname];
-            }
+          for (let attrname in req.query) {
+            req.props[attrname] = req.query[attrname];
+          }
+          console.log(req.props);
 
           // Utilisez le modèle de schéma pour récupérer tous les utilisateurs de la base de données
           User.find(req.props, (err, users) => {
@@ -93,18 +73,14 @@ router
               res.send(users);
             }
           });
-        } else {
-          res.status(401).send({
-            message: "Vous n'avez pas la permission de voir cette route",
-          });
-        }
+
       } catch (error) {
         res.status(500).send(error);
       }
     }
   )
   .delete(
-    "/delete",
+    "/delete",isAuth,
 
     async (req, res) => {
       console.log(req.body);
@@ -138,16 +114,13 @@ router
       }
     }
   )
-  .put(
-    "/update",
+  .put("/update",isAuth,
 
     async (req, res) => {
       try {
         console.log(req.query._id);
 
-        const user = await User.findByIdAndUpdate(req.query._id, {
-          ...req.body,
-        });
+        const user = await User.findByIdAndUpdate(req.query._id, {...req.body,});
         res.send(user);
       } catch (error) {
         console.log(error);
@@ -155,8 +128,7 @@ router
       }
     }
   )
-  .post(
-    "/login",
+  .post("/login",
 
     async (req, res) => {
       // Recherchez l'utilisateur dans la base de données en utilisant l'e-mail envoyé dans la requête
@@ -177,7 +149,7 @@ router
             } else {
               // Générez un jeton JWT pour l'utilisateur
               const token = jwt.sign(
-                { id: user.id, email: user.email, role: user.role },
+                { id: user._id, email: user.email, role: user.role },
                 process.env.JWT_SECRET,
                 { expiresIn: "1h" }
               );
@@ -188,8 +160,7 @@ router
       });
     }
   )
-  .post(
-    "/register",
+  .post("/register",
 
     async (req, res) => {
       // Vérifiez si l'adresse e-mail est déjà utilisée
@@ -211,6 +182,7 @@ router
                 id: req.body.id,
                 email: req.body.email,
                 pseudo: req.body.pseudo,
+                role: req.body.role,
                 password: hash,
               });
               // Enregistrez l'utilisateur dans la base de données
@@ -220,7 +192,7 @@ router
                 } else {
                   // Générez un jeton JWT pour l'utilisateur
                   const token = jwt.sign(
-                    { id: user.id, email: user.email, role: user.role },
+                    { id: user._id, email: user.email, role: user.role },
                     process.env.JWT_SECRET,
                     { expiresIn: "1h" }
                   );
