@@ -4,6 +4,7 @@ const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const isAuth = require('../middleware/auth')
+const isAdmin = require('../middleware/isAdmin')
 
 router
   // .post('/signup',
@@ -120,8 +121,20 @@ router
       try {
         console.log(req.query._id);
 
+        console.log(req.user);
+        console.log(req.query.email);
+
+        // const userD = await User.findOne(req.query._id)
+        // console.log(userD);
+
+        if (!req.user.role == "Admin" && req.user._id !== req.query._id) {
+
+          return res.status(400).send("Vous n'avez pas la permission de voir cette route")
+
+        }
+
         const user = await User.findByIdAndUpdate(req.query._id, {...req.body,});
-        res.send(user);
+        res.status(200).send(user);
       } catch (error) {
         console.log(error);
         res.status(400).json({ error });

@@ -33,6 +33,7 @@ const UserModel = new Schema({
     type: String,
     enum: ["Admin", "Employee", "User"],
     required: true,
+    default: "User",
   }
 
 });
