@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const mongoose = require('mongoose')
 const isAuth = require('../middleware/auth')
 const isAdmin = require('../middleware/isAdmin')
 
@@ -119,19 +120,18 @@ router
 
     async (req, res) => {
       try {
-        console.log(req.query._id);
+        const paramsId = mongoose.Types.ObjectId(req.query._id);
+        const userId = req.user._id;
 
-        console.log(req.user);
-        console.log(req.query.email);
-
-        // const userD = await User.findOne(req.query._id)
-        // console.log(userD);
-
-        if (!req.user.role == "Admin" && req.user._id !== req.query._id) {
-
+        if (req.user.role != "Admin" && paramsId != userId)
+        {
+          console.log(userId);
+          console.log(paramsId);
+          console.log(req.user);
           return res.status(400).send("Vous n'avez pas la permission de voir cette route")
-
         }
+
+
 
         const user = await User.findByIdAndUpdate(req.query._id, {...req.body,});
         res.status(200).send(user);
