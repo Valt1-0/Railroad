@@ -8,9 +8,9 @@ const Schema =  mongoose.Schema;
 **/
 
 const UserModel = new Schema({
-  id: {
-    type: Number,
-  },
+  // id: {
+  //   type: Number,
+  // },
   pseudo: {
     type: String,
     unique: true,

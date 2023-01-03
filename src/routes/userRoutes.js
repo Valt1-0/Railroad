@@ -81,38 +81,22 @@ router
       }
     }
   )
-  .delete(
-    "/delete",isAuth,
+  .delete("/delete",isAuth,
 
     async (req, res) => {
       console.log(req.body);
       try {
-        if (req.body.role == "Admin") {
+
+        if (!req.user) return res.status(401).send({ error: 'Not authenticated' });
+
+        if (req.user.email == req.body.email) {
           const user = await User.deleteOne({ email: req.body.email });
           res.send(user);
+        } else {
+          res.status(403).send({ error: "You dont have the permission"})
         }
       } catch (error) {
         res.status(400).json({ msg: "You dont have the permission" });
-      }
-    }
-  )
-  .post(
-    "/add",
-
-    async (req, res) => {
-      try {
-        let email = req.body.email;
-        let userExist = await User.findOne({ email });
-
-        if (userExist) {
-          return res.status(400).json({ msg: "User already exist" });
-        }
-        const user = new User({ ...req.body });
-        await user.save();
-        res.send(user);
-      } catch (error) {
-        console.log(error);
-        res.status(400).json({ error });
       }
     }
   )
@@ -120,21 +104,34 @@ router
 
     async (req, res) => {
       try {
-        const paramsId = mongoose.Types.ObjectId(req.query._id);
+        const paramsId = req.query._id;
         const userId = req.user._id;
 
-        if (req.user.role != "Admin" && paramsId != userId)
+        console.log(userId);
+        console.log(paramsId);
+        console.log(userId == paramsId)
+
+        // vérification de la connexion de l'utilisateur
+        if (!req.user) return res.status(401).send({ error: 'Not authenticated' });
+
+        if (paramsId != undefined)
         {
+          const paramsId = mongoose.Types.ObjectId(req.query._id);
+
           console.log(userId);
           console.log(paramsId);
-          console.log(req.user);
-          return res.status(400).send("Vous n'avez pas la permission de voir cette route")
+          console.log(userId == paramsId)
+
+          if (( paramsId != userId && req.user.role != "Admin" ))
+            return res.status(403).send("Vous n'avez pas la permission de voir cette route")
+          else
+            userId = paramsId
+
         }
-
-
 
         const user = await User.findByIdAndUpdate(req.query._id, {...req.body,});
         res.status(200).send(user);
+
       } catch (error) {
         console.log(error);
         res.status(400).json({ error });
@@ -201,6 +198,7 @@ router
               // Enregistrez l'utilisateur dans la base de données
               newUser.save((err, user) => {
                 if (err) {
+                  console.error(err);
                   res.status(500).send(err);
                 } else {
                   // Générez un jeton JWT pour l'utilisateur
