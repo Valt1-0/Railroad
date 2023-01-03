@@ -1,90 +1,88 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
 
-const Train = require('../models/trainModel')
+const Train = require("../models/trainModel");
+
+const isAuth = require("../middleware/auth");
+
+const isAdmin = require("../middleware/isAdmin");
 
 router
-    .get("/find",
+  .get(
+    "/find",
 
-        async (req, res) => {
+    async (req, res) => {
+      try {
+        const sort = req.query.sort || "time_of_departure";
+        const limit = req.query.limit || 10;
 
-            try {
+        Train.find({}, null, { sort: sort, limit: limit }, (err, trains) => {
+          if (err) return res.send(err);
+          res.send(trains);
+        });
+      } catch (error) {
+        console.error(error);
+        res.status(400).send("Don't Exist");
+      }
+    }
+  )
+  .delete("/delete",isAuth,isAdmin,
 
-                const sort = req.query.sort || 'time_of_departure';
-                const limit = req.query.limit || 10;
+    async (req, res) => {
+      console.log(req.body);
+      try {
+        // récupération de l'ID du train à partir de l'URL
+        const deletedTrain = req.body.name;
 
-                req.props =  {};
-                if (req.query) for (let attrname in req.query) {
-                    req.props[attrname] = req.query[attrname];
-                }
-                const trains = await Train.find(req.props);
-                res.status(200).send(trains);
+        // vérification de la connexion de l'utilisateur et de son rôle
+        if (!req.user) return res.status(401).send({ error: "Not authenticated or not authorized" });
 
-            } catch (error) {
-                console.error(error);
-                res.status(400).send('Don\'t Exist');
-            }
+        // suppression du train en base de données
+        Train.deleteOne({ name: deletedTrain}, (err, train) => {
+          if (err) return res.send(err);
+        res.send(train);
+        });
+      } catch (error) {
+        res.status(400).json({ msg: "You dont have the permission" });
+      }
+    }
+  )
+  .post("/add",isAuth,isAdmin,
 
+    async (req, res) => {
+      try {
+        let name = req.body.name;
+        let trainExist = await Train.findOne({ name });
 
+        if (trainExist) {
+          return res.status(400).json({ msg: "Train already exist" });
         }
-    )
-    .delete("/delete",
+        const train = new Train({ ...req.body });
+        await train.save();
+        res.send(train);
+      } catch (error) {
+        console.log(error);
+        res.status(400).json({ error });
+      }
+    }
+  )
+  .put(
+    "/update",isAuth,isAdmin,
 
-        async (req, res) => {
-            console.log(req.body);
-            try {
-                if (req.body.role == 'Admin') {
-                    const user = await User.deleteOne({ "email": req.body.email})
-                    res.send(user)
-                }
-            } catch (error) {
-                res.status(400).json({ msg: 'You dont have the permission'})
-            }
-        }
+    async (req, res) => {
+      try {
+        console.log(req.query._id);
 
-    )
-    .post("/add",
+        const train = await Train.findByIdAndUpdate(req.query._id, {
+          ...req.body,
+        });
+        res.send(train);
+      } catch (error) {
+        console.log(error);
+        res.status(400).json({ error });
+      }
+    }
+  );
 
-        async (req, res) => {
-
-            try {
-                let email = req.body.email
-                let userExist = await Train.findOne({email});
-
-                if (userExist) {
-                    return res.status(400).json({ msg: 'User already exist'})
-                }
-                const user = new Train({... req.body})
-                await user.save();
-                res.send(user)
-            } catch (error) {
-                console.log(error);
-                res.status(400).json({error})
-
-            }
-
-        }
-
-    )
-    .put("/update",
-
-        async (req, res) => {
-
-            try {
-                console.log(req.query._id);
-
-                const user = await Train.findByIdAndUpdate(req.query._id, { ...req.body});
-                res.send(user);
-            } catch (error) {
-                console.log(error);
-                res.status(400).json({error})
-
-            }
-
-        }
-
-    )
-
-
-module.exports = router
+module.exports = router;

@@ -1,7 +1,3 @@
-const express = require("express");
-const User = require("../models/userModel");
-const jwt = require("jsonwebtoken");
-
 
 isAdmin = async (req, res, next) => {
 
