@@ -10,12 +10,16 @@ router
         async (req, res) => {
 
             try {
+
+                const sort = req.query.sort || 'time_of_departure';
+                const limit = req.query.limit || 10;
+
                 req.props =  {};
                 if (req.query) for (let attrname in req.query) {
                     req.props[attrname] = req.query[attrname];
                 }
-                const users = await Train.find(req.props);
-                res.status(200).send(users);
+                const trains = await Train.find(req.props);
+                res.status(200).send(trains);
 
             } catch (error) {
                 console.error(error);
