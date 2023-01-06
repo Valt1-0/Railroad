@@ -15,7 +15,7 @@ git clone https://github.com/Valt1-0/Railroad.git
 npm install
 
 # 3. Change your "MONGODB_URI"
-Generate a MongoDB Compas database and paste it in the .env
+Generate a MongoDB Atlas database and paste it in the .env
 
 # 4. Run the API in a terminal
 npm run start
