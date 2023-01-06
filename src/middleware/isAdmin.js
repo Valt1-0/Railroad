@@ -5,13 +5,12 @@ isAdmin = async (req, res, next) => {
 
     try {
         if (req.user.role == 'Admin') {
-            res.status(200).send('OK')
             next()
           } else {
-            res.status(403).send('You don\'t have permissions')
+            return res.status(403).send('You don\'t have permissions')
           }
     } catch (error) {
-        res.status(500).send(error)
+        return res.status(500).send(error)
     }
 
 };

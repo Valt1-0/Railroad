@@ -9,8 +9,7 @@ const isAuth = require("../middleware/auth");
 const isAdmin = require("../middleware/isAdmin");
 
 router
-  .get(
-    "/find",
+  .get("/find",
 
     async (req, res) => {
       try {

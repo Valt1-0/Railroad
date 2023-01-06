@@ -3,6 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 const TrainStation = require('../models/trainstationModel')
+const Train = require('../models/trainModel')
+const isAuth = require('../middleware/auth')
+const isAdmin = require('../middleware/isAdmin')
 
 router
     .get("/find",
@@ -10,50 +13,60 @@ router
         async (req, res) => {
 
             try {
-                req.props =  {};
-                if (req.query) for (let attrname in req.query) {
-                    req.props[attrname] = req.query[attrname];
-                }
-                const users = await TrainStation.find(req.props);
-                res.status(200).send(users);
+                const sort = req.query.sort || "name";
 
+                TrainStation.find({}, null, { sort: sort }, (err, trainStations) => {
+                    if (err) return res.send(err);
+                    res.send(trainStations);
+                });
             } catch (error) {
                 console.error(error);
-                res.status(400).send('Don\'t Exist');
+                res.status(400).send("Don't Exist");
             }
-
-
         }
     )
-    .delete("/delete",
+    .delete("/delete",isAuth,isAdmin,
 
         async (req, res) => {
             console.log(req.body);
             try {
-                if (req.body.role == 'Admin') {
-                    const user = await User.deleteOne({ "email": req.body.email})
-                    res.send(user)
+                let name = req.body.name;
+                let stationExist = await TrainStation.findOne({ name });
+
+                if (!stationExist) {
+                  return res.status(400).json({ msg: "Train Station not existing" });
                 }
-            } catch (error) {
-                res.status(400).json({ msg: 'You dont have the permission'})
-            }
+
+                // mise à jour des trains associés à la gare
+                await Train.updateMany(
+                    { $or: [{ start_station: name }, { end_station: name }] },
+                    { $set: { start_station: null, end_station: null } }
+                );
+
+                // suppression de la gare
+                const trainStation = await TrainStation.findOneAndDelete({ name });
+                res.send(trainStation);
+              } catch (error) {
+                console.log(error);
+                return res.status(400).json({ msg: "You don't have the permission" });
+              }
         }
 
     )
-    .post("/add",
+    .post("/add",isAuth,isAdmin,
 
         async (req, res) => {
 
             try {
-                let email = req.body.email
-                let userExist = await TrainStation.findOne({email});
+                let name = req.body.name
+                let stationExist = await TrainStation.findOne({name});
 
-                if (userExist) {
-                    return res.status(400).json({ msg: 'User already exist'})
+                if (stationExist) {
+                    return res.status(400).json({ msg: 'Train Station already exist'})
                 }
-                const user = new TrainStation({... req.body})
-                await user.save();
-                res.send(user)
+                const station = new TrainStation({... req.body})
+                await station.save();
+                res.send(station)
             } catch (error) {
                 console.log(error);
                 res.status(400).json({error})

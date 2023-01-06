@@ -59,7 +59,7 @@ router
 
           return res.status(400).send("Vous n'avez pas la permission de voir cette route")
 
-        } 
+        }
 
           if (req.query)
           for (let attrname in req.query) {

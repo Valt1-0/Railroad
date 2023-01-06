@@ -1,4 +1,4 @@
-const { Faker } = require('@faker-js/faker');
+const { faker } = require('@faker-js/faker');
 const mongoose = require('mongoose')
 
 const Schema =  mongoose.Schema;
@@ -18,16 +18,16 @@ const TrainStationModel = new Schema({
     required: true,
   },
   open_hour: {
-    type: Date,
+    type: String,
     required: true,
   },
   close_hour: {
-    type: Date,
+    type: String,
     required: true,
   },
   image: {
     type: String,
-    default: Faker.image.trains(),
+    default: faker.image.transport(200,200),
   }
 
 });
