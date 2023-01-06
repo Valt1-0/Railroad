@@ -21,7 +21,7 @@ router
                 });
             } catch (error) {
                 console.error(error);
-                res.status(400).send("Don't Exist");
+                res.status(404).send('Not found');
             }
         }
     )
@@ -36,7 +36,6 @@ router
                 if (!stationExist) {
                   return res.status(400).json({ msg: "Train Station not existing" });
                 }
-
                 // mise à jour des trains associés à la gare
                 await Train.updateMany(
                     { $or: [{ start_station: name }, { end_station: name }] },
@@ -46,10 +45,9 @@ router
                 // suppression de la gare
                 const trainStation = await TrainStation.findOneAndDelete({ name });
                 res.send(trainStation);
-              } catch (error) {
-                console.log(error);
-                return res.status(400).json({ msg: "You don't have the permission" });
-              }
+            } catch (error) {
+                res.status(401).json({ msg: 'You dont have the permission'})
+            }
         }
 
     )
@@ -62,8 +60,9 @@ router
                 let stationExist = await TrainStation.findOne({name});
 
                 if (stationExist) {
-                    return res.status(400).json({ msg: 'Train Station already exist'})
+                    return res.status(409).json({ msg: 'Train Station already exist'})
                 }
+
                 const station = new TrainStation({... req.body})
                 await station.save();
                 res.send(station)
