@@ -4,6 +4,8 @@ const router = express.Router();
 
 const Train = require("../models/trainModel");
 
+const TrainStation = require("../models/trainstationModel")
+
 const isAuth = require("../middleware/auth");
 
 const isAdmin = require("../middleware/isAdmin");
@@ -47,7 +49,7 @@ router
       }
     }
   )
-  .post("/add",isAuth,isAdmin,
+  .post("/add",
 
     async (req, res) => {
       try {
@@ -57,6 +59,19 @@ router
         if (trainExist) {
           return res.status(400).json({ msg: "Train already exist" });
         }
+
+        // Vérification de l'existence de la gare de départ
+        let startStationExist = await TrainStation.findOne({ name: req.body.start_station });
+        if (!startStationExist) {
+          return res.status(400).json({ msg: "Start station not existing" });
+        }
+
+        // Vérification de l'existence de la gare d'arrivée
+        let endStationExist = await TrainStation.findOne({ name: req.body.end_station });
+        if (!endStationExist) {
+          return res.status(400).json({ msg: "End station not existing" });
+        }
+
         const train = new Train({ ...req.body });
         await train.save();
         res.send(train);
@@ -66,8 +81,7 @@ router
       }
     }
   )
-  .put(
-    "/update",isAuth,isAdmin,
+  .put("/update",isAuth,isAdmin,
 
     async (req, res) => {
       try {

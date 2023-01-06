@@ -38,8 +38,12 @@ router
                 }
                 // mise à jour des trains associés à la gare
                 await Train.updateMany(
-                    { $or: [{ start_station: name }, { end_station: name }] },
-                    { $set: { start_station: null, end_station: null } }
+                    { start_station: name },
+                    { $set: { start_station: null }}
+                );
+                await Train.updateMany(
+                    { end_station: name },
+                    { $set: { end_station: null } }
                 );
 
                 // suppression de la gare
@@ -51,7 +55,7 @@ router
         }
 
     )
-    .post("/add",isAuth,isAdmin,
+    .post("/add",
 
         async (req, res) => {
 
