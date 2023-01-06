@@ -19,7 +19,7 @@ router
 
             } catch (error) {
                 console.error(error);
-                res.status(400).send('Don\'t Exist');
+                res.status(404).send('Not found');
             }
 
 
@@ -35,7 +35,7 @@ router
                     res.send(user)
                 }
             } catch (error) {
-                res.status(400).json({ msg: 'You dont have the permission'})
+                res.status(401).json({ msg: 'You dont have the permission'})
             }
         }
 
@@ -49,7 +49,7 @@ router
                 let userExist = await TrainStation.findOne({email});
 
                 if (userExist) {
-                    return res.status(400).json({ msg: 'User already exist'})
+                    return res.status(409).json({ msg: 'User already exist'})
                 }
                 const user = new TrainStation({... req.body})
                 await user.save();
