@@ -2,7 +2,7 @@
 
 RailRoad ltd is a company which aim to produce the best experience for your local and national commute.
 A full API using Node.js and Express.js allowing users to access information about train station or other relevant data.
-It also allow people to "book" a ticket from one stop to another and provide an interface for specific user to verify the validity of the ticket
+It also allow people to "book" a ticket from one stop to another and provide an interface for specific user to verify the validity of the ticket.
 
 # REQUIRED :
 ✅ NodeJS
