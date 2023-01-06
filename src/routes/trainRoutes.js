@@ -36,9 +36,6 @@ router
         // récupération de l'ID du train à partir de l'URL
         const deletedTrain = req.body.name;
 
-        // vérification de la connexion de l'utilisateur et de son rôle
-        if (!req.user) return res.status(401).send({ error: "Not authenticated or not authorized" });
-
         // suppression du train en base de données
         Train.deleteOne({ name: deletedTrain}, (err, train) => {
           if (err) return res.send(err);
@@ -49,7 +46,7 @@ router
       }
     }
   )
-  .post("/add",
+  .post("/add",isAuth,isAdmin,
 
     async (req, res) => {
       try {

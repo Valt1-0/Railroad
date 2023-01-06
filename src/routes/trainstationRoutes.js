@@ -36,18 +36,11 @@ router
                 if (!stationExist) {
                   return res.status(404).json({ msg: "Train Station not existing" });
                 }
-                // mise à jour des trains associés à la gare
-                await Train.updateMany(
-                    { start_station: name },
-                    { $set: { start_station: null }}
-                );
-                await Train.updateMany(
-                    { end_station: name },
-                    { $set: { end_station: null } }
-                );
+                // Suppression des trains associés
+                await Train.deleteMany({ $or: [{ start_station: name }, { end_station: name }] });
 
-                // suppression de la gare
-                const trainStation = await TrainStation.findOneAndDelete({ name });
+                // Suppression de la gare
+                const trainStation = await TrainStation.deleteOne({ name });
                 res.send(trainStation);
             } catch (error) {
                 res.status(403).json({ msg: 'You dont have the permission'})
@@ -55,7 +48,7 @@ router
         }
 
     )
-    .post("/add",
+    .post("/add",isAuth,isAdmin,
 
         async (req, res) => {
 
@@ -67,27 +60,25 @@ router
                     return res.status(409).json({ msg: 'Train Station already exist'})
                 }
 
-                const station = new TrainStation({... req.body})
-                await station.save();
-                res.send(station)
+                const trainStation = new TrainStation({... req.body});
+                await trainStation.save();
+                res.send(trainStation);
             } catch (error) {
                 console.log(error);
                 res.status(400).json({error})
 
             }
-
         }
-
     )
-    .put("/update",
+    .put("/update",isAuth,isAdmin,
 
         async (req, res) => {
 
             try {
                 console.log(req.query._id);
 
-                const user = await TrainStation.findByIdAndUpdate(req.query._id, { ...req.body});
-                res.send(user);
+                const trainStation = await TrainStation.findByIdAndUpdate(req.query._id, { ...req.body});
+                res.send(trainStation);
             } catch (error) {
                 console.log(error);
                 res.status(400).json({error})
