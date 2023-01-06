@@ -24,7 +24,7 @@ router
         });
       } catch (error) {
         console.error(error);
-        res.status(400).send("Don't Exist");
+        res.status(404).send("Not found");
       }
     }
   )
@@ -45,7 +45,7 @@ router
         res.send(train);
         });
       } catch (error) {
-        res.status(400).json({ msg: "You dont have the permission" });
+        res.status(403).json({ msg: "You dont have the permission" });
       }
     }
   )
@@ -57,7 +57,7 @@ router
         let trainExist = await Train.findOne({ name });
 
         if (trainExist) {
-          return res.status(400).json({ msg: "Train already exist" });
+          return res.status(409).json({ msg: "Train already exist" });
         }
 
         // Vérification de l'existence de la gare de départ

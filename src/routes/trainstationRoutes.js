@@ -34,7 +34,7 @@ router
                 let stationExist = await TrainStation.findOne({ name });
 
                 if (!stationExist) {
-                  return res.status(400).json({ msg: "Train Station not existing" });
+                  return res.status(404).json({ msg: "Train Station not existing" });
                 }
                 // mise à jour des trains associés à la gare
                 await Train.updateMany(
@@ -50,7 +50,7 @@ router
                 const trainStation = await TrainStation.findOneAndDelete({ name });
                 res.send(trainStation);
             } catch (error) {
-                res.status(401).json({ msg: 'You dont have the permission'})
+                res.status(403).json({ msg: 'You dont have the permission'})
             }
         }
 

@@ -57,7 +57,7 @@ router
 
         if (!["Employee","Admin"].includes(req.user.role) && req.user.email !== req.query.email) {
 
-          return res.status(400).send("Vous n'avez pas la permission de voir cette route")
+          return res.status(401).send("You dont have the permission")
 
         }
 
@@ -123,7 +123,7 @@ router
           console.log(userId == paramsId)
 
           if (( paramsId != userId && req.user.role != "Admin" ))
-            return res.status(403).send("Vous n'avez pas la permission de voir cette route")
+            return res.status(403).send("You dont have the permission")
           else
             userId = paramsId
 
