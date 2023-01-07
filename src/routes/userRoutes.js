@@ -8,42 +8,6 @@ const isAuth = require('../middleware/auth')
 const isAdmin = require('../middleware/isAdmin')
 
 router
-  // .post('/signup',
-
-  //     async (req, res) => {
-  //         console.log(req.body)
-
-  //     const {
-  //         email,
-  //         isAdmin,
-  //         personnage
-  //     } = req.body
-
-  //     try {
-  //         let user = await User.findOne({ email })
-  //         if (user){
-  //             return res.status(400).json({
-  //                 message: 'User already exist'
-  //             })
-  //         }
-  //         user = new User({
-  //             email,
-  //             isAdmin,
-  //             personnage
-  //         })
-
-  //         await user.save();
-  //         const payload =  {
-  //             user: {
-  //                 id: user.id
-  //             }
-  //         }
-  //     } catch (error) {
-
-  //         console.error(error);
-  //         res.status(500).send('Erreur lors de la sauvegarde')
-  //     }
-  // })
   .get(
     "/find",isAuth,
 

@@ -20,6 +20,9 @@ const TicketModel = new Schema({
     type: String,
     required: true,
   },
+  isValidated: {
+    type: Boolean,
+  }
 
 });
 

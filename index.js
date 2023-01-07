@@ -7,6 +7,8 @@ const chalk = require("chalk");
 const userRoutes = require("./src/routes/userRoutes")
 const trainRoutes = require("./src/routes/trainRoutes")
 const trainStationRoutes = require("./src/routes/trainstationRoutes")
+const ticketRoutes = require("./src/routes/ticketRoutes")
+
 
 
 /**
@@ -33,6 +35,7 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/trains', trainRoutes);
 app.use('/trainstations', trainStationRoutes);
+app.use('/ticket', ticketRoutes);
 
 
 app.listen(PORT, () => {
