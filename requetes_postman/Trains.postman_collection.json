@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "a63c887f-6f4a-4e39-934e-0ba4615f121e",
+		"name": "Trains",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20383362"
+	},
+	"item": [
+		{
+			"name": "Find Trains",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/trains/find?limit=50",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"trains",
+						"find"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "50"
+						},
+						{
+							"key": "sort",
+							"value": "start_station",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Train",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTQzYmRhMTVlMzI0MGY4ODA5MjlkNiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjczMDM5OTA4LCJleHAiOjE2NzMwNDM1MDh9.xB-P2pGfMpA8C5SPO4MVNDMFTdcoA-F0NvIuodhBSew",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "R2D2",
+							"type": "text"
+						},
+						{
+							"key": "start_station",
+							"value": "YoyoStationCaen",
+							"type": "text"
+						},
+						{
+							"key": "end_station",
+							"value": "ValStationCaen",
+							"type": "text"
+						},
+						{
+							"key": "time_of_departure",
+							"value": "21:34",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/trains/add",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"trains",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Train",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTQ0OTU4YTdkOTcyNTdkZDg1NGNkNCIsImVtYWlsIjoiZW1wbG95ZWVAZ21haWwuY29tIiwicm9sZSI6IkVtcGxveWVlIiwiaWF0IjoxNjcyNzc2NjY3LCJleHAiOjE2NzI3ODAyNjd9.K_snCp9ibDt8q35VRA2z7GFs2Srd4FEGxhiJc64pdnk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "ChiTGV",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/trains/delete",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"trains",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Train",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTQzYmRhMTVlMzI0MGY4ODA5MjlkNiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjczMDM5OTA4LCJleHAiOjE2NzMwNDM1MDh9.xB-P2pGfMpA8C5SPO4MVNDMFTdcoA-F0NvIuodhBSew",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/trains/update",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"trains",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

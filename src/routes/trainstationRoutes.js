@@ -1,11 +1,19 @@
 const express = require('express');
 
 const router = express.Router();
+const sharp = require("sharp");
+const fs = require("fs");
+const path = require("path");
 
-const TrainStation = require('../models/trainstationModel')
-const Train = require('../models/trainModel')
-const isAuth = require('../middleware/auth')
-const isAdmin = require('../middleware/isAdmin')
+const TrainStation = require('../models/trainstationModel');
+const Train = require('../models/trainModel');
+
+const isAuth = require('../middleware/auth');
+const isAdmin = require('../middleware/isAdmin');
+const fileUpload = require('../middleware/fileUpload');
+
+
+
 
 router
     .get("/find",
@@ -48,7 +56,7 @@ router
         }
 
     )
-    .post("/add",isAuth,isAdmin,
+    .post("/add",isAuth,isAdmin,fileUpload(),
 
         async (req, res) => {
 
@@ -59,6 +67,30 @@ router
                 if (stationExist) {
                     return res.status(409).json({ msg: 'Train Station already exist'})
                 }
+
+
+                console.log("image : " + req.file.originalname)
+                console.log("image : " + req.file.fieldname)
+                console.log("image : " + req.file.size)
+
+                // redimensionnement de l'image si nécessaire
+                if (req.file) {
+                try {
+                    const fileName = req.file.originalname
+
+                    const image = sharp(req.file.buffer);
+                    const metadata = await image.metadata();
+                    if (metadata.width > 200 || metadata.height > 200) {
+                        image.resize(200, 200);
+                    }
+                    const imageResized = await image.toBuffer();
+                    const imgUrl = `src/img/trainStations/${fileName}`;
+                    fs.writeFileSync(imgUrl, imageResized);
+                    req.body.image = fileName;
+                } catch (error) {
+                    console.error(error);
+                    return res.status(400).json({ msg: "Invalid image link" });
+                }}
 
                 const trainStation = new TrainStation({... req.body});
                 await trainStation.save();
@@ -84,9 +116,7 @@ router
                 res.status(400).json({error})
 
             }
-
         }
-
     )
 
 

@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "7d467b2c-a1ea-47ed-b83d-3b548678bde9",
+		"name": "Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20383362"
+	},
+	"item": [
+		{
+			"name": "Find Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjEsImVtYWlsIjoidXNlcjJAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE2NzIxNTgwMTYsImV4cCI6MTY3MjE2MTYxNn0.GIGn3vljqizHIPppM1g_sdrFzyGMIJKJlVNJX6je-gU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users/find?email=user2@gmail.com",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"find"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "user2@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjQ2ZDYyZGM0MGIwOGM0NWVmZTM1MSIsImVtYWlsIjoiZ3VpbGxhdW1lQGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjcyNzY4ODY3LCJleHAiOjE2NzI3NzI0Njd9.weOS86zDFJSrpxH5iyc3dBTnPuyLyqh-WwtDRyTsQLQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "guillaume@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "Admin",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "pseudo",
+							"value": "Yoyo6k",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users/delete",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "role",
+							"value": "Admin",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWIxZTVkMjI3N2ZiNzZiMTAyODQ0NyIsImVtYWlsIjoidXNlcjJAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE2NzIxNTg4MTMsImV4cCI6MTY3MjE2MjQxM30.2GE_aMHP7yBk2H9vd-aoIkyatHyTzN9NWPEDpX4C-2I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "pseudo",
+							"value": "user3",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "user2@gmail.com",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users/update?_id=63ab1e5d2277fb76b1028447",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"update"
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": "63ab1e5d2277fb76b1028447"
+						},
+						{
+							"key": "email",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "pseudo",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "admin@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "pseudo",
+							"value": "guillaume",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "guillaume@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "User",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

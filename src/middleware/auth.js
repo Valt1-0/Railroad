@@ -9,8 +9,6 @@ isAuth = async (req, res, next) => {
   if (req.headers.authorization) {
     const token = req.headers.authorization.split(" ")[1];
 
-    console.log(req.headers.authorization);
-
     try {
       const jwt_token = jwt.verify(token, process.env.JWT_SECRET);
       const user = await User.findById(jwt_token.id);

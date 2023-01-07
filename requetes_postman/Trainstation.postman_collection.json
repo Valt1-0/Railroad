@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "eb6623ef-9ec5-42b7-95a6-20f47ac3ea43",
+		"name": "Trainstation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20383362"
+	},
+	"item": [
+		{
+			"name": "Find TrainStations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/trainstations/find",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"trainstations",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add TrainStation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTQzYmRhMTVlMzI0MGY4ODA5MjlkNiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjczMDQ0NTQ5LCJleHAiOjE2NzMwNDgxNDl9.8OCb7pFmRZWy35QdpYS16bVr0DHhXF8Nq8MxkUFig0Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Dijon",
+							"type": "text"
+						},
+						{
+							"key": "open_hour",
+							"value": "08:54",
+							"type": "text"
+						},
+						{
+							"key": "close_hour",
+							"value": "10:15",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/33622/Downloads/Gare-Montparnasse-Paris-02-2018.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/trainstations/add",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"trainstations",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete TrainStation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTQzYmRhMTVlMzI0MGY4ODA5MjlkNiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjczMDM5OTA4LCJleHAiOjE2NzMwNDM1MDh9.xB-P2pGfMpA8C5SPO4MVNDMFTdcoA-F0NvIuodhBSew",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "AoyoStationCaen",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/trainstations/delete",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"trainstations",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update TrainStation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTQ0OTU4YTdkOTcyNTdkZDg1NGNkNCIsImVtYWlsIjoiZW1wbG95ZWVAZ21haWwuY29tIiwicm9sZSI6IkVtcGxveWVlIiwiaWF0IjoxNjczMDQxMDQwLCJleHAiOjE2NzMwNDQ2NDB9.2x_H0WxOg3eH4hayWsEhAxWNg8jJKfNn1UhLSh45FZ4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "SDFStationCaen",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/trainstations/update?_id=63b893710dac29d40f947b6e",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"trainstations",
+						"update"
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": "63b893710dac29d40f947b6e"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
