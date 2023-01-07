@@ -21,8 +21,8 @@ Il permet également aux gens de "réserver" un billet d'un arrêt à un autre e
 
 # Using :
 
-[![MongoDB][MongoDB]][MongoDB-url]
-[![JWT][JWT]][JWT-url]
+* [![MongoDB][MongoDB]][MongoDB-url]
+* [![JWT][JWT]][JWT-url]
 
 # Installation :
 ## 1. Clone the repository.
@@ -48,16 +48,6 @@ Get the postman export file in **requetes_postman** folder and import it into yo
 
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
-
-<h3 align="center">A passionate frontend developer from India</h3>
-
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-</p>
-
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> </p>
 
 
 [Node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
