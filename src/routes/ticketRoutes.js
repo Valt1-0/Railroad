@@ -4,7 +4,7 @@ const router = express.Router();
 
 const Train = require("../models/trainModel");
 
-const isAuth = require("../middleware/auth");
+const isAuth = require("../middleware/isAuth");
 
 const isAdmin = require("../middleware/isAdmin");
 

@@ -6,7 +6,7 @@ const Train = require("../models/trainModel");
 
 const TrainStation = require("../models/trainstationModel")
 
-const isAuth = require("../middleware/auth");
+const isAuth = require("../middleware/isAuth");
 
 const isAdmin = require("../middleware/isAdmin");
 

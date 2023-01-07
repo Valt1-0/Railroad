@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const mongoose = require('mongoose')
-const isAuth = require('../middleware/auth')
+const isAuth = require('../middleware/isAuth')
 const isAdmin = require('../middleware/isAdmin')
 
 router
