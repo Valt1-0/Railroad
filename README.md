@@ -6,7 +6,7 @@ It also allow people to "book" a ticket from one stop to another and provide an 
 
 # Required :
 
-* [![Node][Node.js]][Node-url]
+[![Node][Node.js]][Node-url]
 
 # Installation :
 # 1. Clone the repository.
