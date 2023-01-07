@@ -8,7 +8,7 @@ const path = require("path");
 const TrainStation = require('../models/trainstationModel');
 const Train = require('../models/trainModel');
 
-const isAuth = require('../middleware/auth');
+const isAuth = require('../middleware/isAuth');
 const isAdmin = require('../middleware/isAdmin');
 const fileUpload = require('../middleware/fileUpload');
 

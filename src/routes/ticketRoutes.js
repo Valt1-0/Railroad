@@ -5,7 +5,8 @@ const router = express.Router();
 const Ticket = require('../models/ticketModel')
 const Train = require("../models/trainModel");
 
-const isAuth = require("../middleware/auth");
+const isAuth = require("../middleware/isAuth");
+
 const isAdmin = require("../middleware/isAdmin");
 
 router
