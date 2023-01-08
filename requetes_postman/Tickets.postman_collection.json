@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "a09b3879-b4ce-465c-b64b-379d49ab3cc1",
+		"name": "Tickets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20383362"
+	},
+	"item": [
+		{
+			"name": "Add Ticket",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTQzYmRhMTVlMzI0MGY4ODA5MjlkNiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjczMTE0Mzc2LCJleHAiOjE2NzMxMTc5NzZ9.-7nU9sozgNXtcOvxfJTFJmdvihK3Mx5s_-RXoryHocc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userEmail",
+							"value": "admin@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "trainName",
+							"value": "R2D2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/ticket/book",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"ticket",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Ticket",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTQ0OTU4YTdkOTcyNTdkZDg1NGNkNCIsImVtYWlsIjoiZW1wbG95ZWVAZ21haWwuY29tIiwicm9sZSI6IkVtcGxveWVlIiwiaWF0IjoxNjczMTE2NDI5LCJleHAiOjE2NzMxMjAwMjl9.OXdnH20w78MdSQWtUOnOPbY1qz7AMN59FLfltciD25E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "start_station",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "end_station",
+							"value": "Caen",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/ticket/validate?ticketId=63b9b747c7eeb5682e9ab47c",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"ticket",
+						"validate"
+					],
+					"query": [
+						{
+							"key": "ticketId",
+							"value": "63b9b747c7eeb5682e9ab47c"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Tickets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/ticket/find",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"ticket",
+						"find"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
