@@ -6,7 +6,8 @@ const bcrypt = require("bcrypt");
 const mongoose = require('mongoose')
 const isAuth = require('../middleware/isAuth')
 const isAdmin = require('../middleware/isAdmin');
-const { validateLogin } = require("../../validator");
+const { validateLogin } = require("../middleware/validator");
+const { validateRegister } = require("../middleware/validator");
 
 
 router
@@ -147,6 +148,13 @@ router
   .post("/register",
 
     async (req, res) => {
+      const { error, value } = validateRegister(req.body);
+
+      if (error) {
+        console.log(error);
+        return res.send(error.details);
+      }
+
       // Vérifiez si l'adresse e-mail est déjà utilisée
       User.findOne({ email: req.body.email }, (err, user) => {
         if (err) {
