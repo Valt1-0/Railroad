@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const mongoose = require('mongoose')
 const isAuth = require('../middleware/isAuth')
 const isAdmin = require('../middleware/isAdmin')
+const validateData = require('../middleware/userValidation')
 
 router
   .get(
@@ -134,7 +135,7 @@ router
       });
     }
   )
-  .post("/register",
+  .post("/register", validateData,
 
     async (req, res) => {
       // Vérifiez si l'adresse e-mail est déjà utilisée
