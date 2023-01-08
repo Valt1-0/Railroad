@@ -5,7 +5,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const mongoose = require('mongoose')
 const isAuth = require('../middleware/isAuth')
-const isAdmin = require('../middleware/isAdmin')
+const isAdmin = require('../middleware/isAdmin');
+const { validateLogin } = require("../../validator");
 
 router
   .get(
@@ -129,6 +130,7 @@ router
               );
               res.send({ token });
             }
+            const { error, value } = validateLogin(req.body);
           });
         }
       });
@@ -173,6 +175,7 @@ router
                   );
                   res.send({ token });
                 }
+              const { error, value } = validateRegister(req.body);
               });
             }
           });
