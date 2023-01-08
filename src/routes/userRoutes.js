@@ -8,6 +8,7 @@ const isAuth = require('../middleware/isAuth')
 const isAdmin = require('../middleware/isAdmin');
 const { validateLogin } = require("../../validator");
 
+
 router
   .get(
     "/find",isAuth,
@@ -136,7 +137,7 @@ router
       });
     }
   )
-  .post("/register",
+  .post("/register", validateData,
 
     async (req, res) => {
       // Vérifiez si l'adresse e-mail est déjà utilisée
