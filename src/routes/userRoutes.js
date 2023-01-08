@@ -107,6 +107,14 @@ router
   .post("/login",
 
     async (req, res) => {
+
+      const { error, value } = validateLogin(req.body);
+
+      if (error) {
+        console.log(error);
+        return res.send(error.details);
+      }
+
       // Recherchez l'utilisateur dans la base de données en utilisant l'e-mail envoyé dans la requête
       User.findOne({ email: req.body.email }, (err, user) => {
         if (err) {
@@ -131,7 +139,6 @@ router
               );
               res.send({ token });
             }
-            const { error, value } = validateLogin(req.body);
           });
         }
       });
