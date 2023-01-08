@@ -7,12 +7,12 @@ const validator = (schema) => (playload) =>
 const registerSchema = Joi.object({ 
     pseudo: Joi.string().required(),
     email: Joi.string().email().required(),
-    password: Joi.string().min(8).max(16).required(),
+    password: Joi.string().min(12).max(16).required(),
 })  
 
 const loginSchema = Joi.object({ 
     email: Joi.string().email().required(),
-    password: Joi.string().min(8).max(16).required(),
+    password: Joi.string().min(12).max(16).required(),
 })
 
 exports.validateRegister = validator(registerSchema);

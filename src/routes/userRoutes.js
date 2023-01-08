@@ -137,7 +137,7 @@ router
       });
     }
   )
-  .post("/register", validateData,
+  .post("/register",
 
     async (req, res) => {
       // Vérifiez si l'adresse e-mail est déjà utilisée
