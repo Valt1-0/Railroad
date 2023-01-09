@@ -9,6 +9,8 @@ const isAuth = require("../middleware/isAuth");
 
 const isAdmin = require("../middleware/isAdmin");
 
+const { validateTicket } = require("../middleware/validator");
+
 router
   .get("/find",
       async (req, res) => {
@@ -57,6 +59,12 @@ router
   .post("/validate",isAuth,
   
   async (req, res) => {
+    const { error, value } = validateTicket(req.body);
+
+      if (error) {
+        console.log(error);
+        return res.send(error.details);
+      }
     try {
 
       if (!["Employee","Admin"].includes(req.user.role)) {
