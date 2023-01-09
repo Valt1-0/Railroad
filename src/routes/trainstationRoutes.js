@@ -1,9 +1,7 @@
 const express = require('express');
-
 const router = express.Router();
 const sharp = require("sharp");
 const fs = require("fs");
-const path = require("path");
 
 const TrainStation = require('../models/trainstationModel');
 const Train = require('../models/trainModel');
@@ -11,6 +9,7 @@ const Train = require('../models/trainModel');
 const isAuth = require('../middleware/isAuth');
 const isAdmin = require('../middleware/isAdmin');
 const fileUpload = require('../middleware/fileUpload');
+const { validateTrainStations } = require('../middleware/validator');
 
 
 
@@ -61,6 +60,15 @@ router
         async (req, res) => {
 
             try {
+
+                // Joi Validation
+                const { error, value } = validateTrainStations(req.body);
+
+                if (error) {
+                    console.log(error);
+                    return res.send(error.details);
+                }
+
                 let name = req.body.name
                 let stationExist = await TrainStation.findOne({name});
 

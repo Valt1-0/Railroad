@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const mongoose = require('mongoose')
+
+const User = require("../models/userModel");
+
 const isAuth = require('../middleware/isAuth')
 const isAdmin = require('../middleware/isAdmin');
 const { validateLogin } = require("../middleware/validator");
@@ -109,6 +111,7 @@ router
 
     async (req, res) => {
 
+      // Joi Validation
       const { error, value } = validateLogin(req.body);
 
       if (error) {

@@ -1,15 +1,11 @@
 const express = require("express");
-
 const router = express.Router();
 
 const Train = require("../models/trainModel");
-
 const TrainStation = require("../models/trainstationModel")
 
 const isAuth = require("../middleware/isAuth");
-
 const isAdmin = require("../middleware/isAdmin");
-
 const { validateTrain } = require("../middleware/validator");
 
 router
@@ -51,12 +47,15 @@ router
   .post("/add",isAuth,isAdmin,
 
     async (req, res) => {
+
+      // Joi Validation
       const { error, value } = validateTrain(req.body);
 
       if (error) {
         console.log(error);
         return res.send(error.details);
       }
+
       try {
         let name = req.body.name;
         let trainExist = await Train.findOne({ name });

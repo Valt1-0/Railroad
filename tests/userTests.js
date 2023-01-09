@@ -19,11 +19,14 @@ const expect = require("chai").expect;
 // })
 
 describe("GET /users/find", () => {
-  it("Return all users", async () => {
-    const res = await request.get("/find");
-
-    expect(res.status).to.eql(200);
-  });
+  it("Return all users", done => {
+    async () => {
+      const res = await request.get("/find");
+      
+      expect(res.status).to.eql(200);
+      done();
+    }
+});
 });
 
 /*

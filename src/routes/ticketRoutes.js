@@ -6,9 +6,7 @@ const Ticket = require('../models/ticketModel')
 const Train = require("../models/trainModel");
 
 const isAuth = require("../middleware/isAuth");
-
 const isAdmin = require("../middleware/isAdmin");
-
 const { validateTicket } = require("../middleware/validator");
 
 router
@@ -59,12 +57,15 @@ router
   .post("/validate",isAuth,
   
   async (req, res) => {
+
+    // Joi Validation
     const { error, value } = validateTicket(req.body);
 
-      if (error) {
-        console.log(error);
-        return res.send(error.details);
-      }
+    if (error) {
+      console.log(error);
+      return res.send(error.details);
+    }
+
     try {
 
       if (!["Employee","Admin"].includes(req.user.role)) {

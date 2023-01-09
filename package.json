@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/*.js"
   },
   "author": "valt",
   "license": "ISC",
@@ -16,7 +16,6 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "joi": "^17.7.0",
-    "joi-image-extension": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.8.0",
     "multer": "^1.4.5-lts.1",
