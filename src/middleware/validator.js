@@ -17,24 +17,25 @@ const registerSchema = Joi.object({
         'string.base': 'invalid type',
         'string.empty': 'password is required',
         'string.min': `password minimum {#limit} characters`,
-}),        
+    }),
     role: Joi.string().valid("User", "Employee", "Admin").required().messages({
         'string.base': 'invalid type',
         'string.empty': 'role is required',
-}),
+    }),
+})
 
 const loginSchema = Joi.object({
     email: Joi.string().email().required().messages({
         'string.base': 'invalid type',
         'string.empty': 'email is required',
-}),
+    }),
     password: Joi.string().required().messages({
         'string.base': 'invalid type',
         'string.empty': 'password is required',
         'string.min': `password minimum {#limit} characters`,
-}), 
-
+    }),
 })
+
 const ticketSchema = Joi.object({
     isValidated: Joi.boolean().required(),
     user: Joi.string().required(),
