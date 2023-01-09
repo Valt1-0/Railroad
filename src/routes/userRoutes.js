@@ -191,7 +191,6 @@ router
                   );
                   res.send({ token });
                 }
-              const { error, value } = validateRegister(req.body);
               });
             }
           });
