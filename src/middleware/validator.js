@@ -62,9 +62,18 @@ const trainSchema = Joi.object({
 })
 
 const trainStationsSchema = Joi.object({
-    name: Joi.string().required(),
-    open_hour: Joi.string().required(),
-    close_hour: Joi.string().required(),
+    name: Joi.string().required().messages({
+        'string.base': 'invalid type',
+        'string.epmty': `Station's name is required`,
+    }),
+    open_hour: Joi.string().required().messages({
+        'string.base': 'invalid type',
+        'string.epmty': `opening hour is required`,
+    }),
+    close_hour: Joi.string().required().messages({
+        'string.base': 'invalid type',
+        'string.epmty': `closure hour is required`,
+    }),
     image: Joi.any()
 })
 
