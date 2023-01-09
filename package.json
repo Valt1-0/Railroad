@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "mocha tests/*.js"
+    "test": "mocha tests/*.js -timeout 20000"
   },
   "author": "valt",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
     "chalk": "^4.1.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
