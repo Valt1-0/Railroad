@@ -1,9 +1,7 @@
 const Joi = require('joi');
-const userModel = require('../models/userModel');
 
 const validator = (schema) => (playload) =>
     schema.validate(playload, { abortEarly: false });
-
 
 const registerSchema = Joi.object({
     pseudo: Joi.string().required(),
@@ -11,7 +9,6 @@ const registerSchema = Joi.object({
     password: Joi.string().min(12).required(),
     role: Joi.string().valid("User", "Employee", "Admin").required(),
 })
-
 
 const loginSchema = Joi.object({
     email: Joi.string().email().required(),
@@ -31,7 +28,15 @@ const trainSchema = Joi.object({
     time_of_departure: Joi.string().required(),
 })
 
+const trainStationsSchema = Joi.object({
+    name: Joi.string().required(),
+    open_hour: Joi.string().required(),
+    close_hour: Joi.string().required(),
+    image: Joi.any()
+})
+
 exports.validateRegister = validator(registerSchema);
 exports.validateLogin = validator(loginSchema);
 exports.validateTicket = validator(ticketSchema);
 exports.validateTrain = validator(trainSchema);
+exports.validateTrainStations = validator(trainStationsSchema);

@@ -9,8 +9,6 @@ const trainRoutes = require("./src/routes/trainRoutes")
 const trainStationRoutes = require("./src/routes/trainstationRoutes")
 const ticketRoutes = require("./src/routes/ticketRoutes")
 
-
-
 /**
  * * MONGO
  */
