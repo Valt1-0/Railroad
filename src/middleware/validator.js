@@ -36,10 +36,14 @@ const loginSchema = Joi.object({
     }),
 })
 
-const ticketSchema = Joi.object({
-    isValidated: Joi.boolean().required(),
-    user: Joi.string().required(),
-    train: Joi.string().required(),
+const ticketValidateSchema = Joi.object({
+    start_station: Joi.string().required(),
+    end_station: Joi.string().required(),
+})
+
+const ticketBookSchema = Joi.object({
+    userEmail: Joi.string().required(),
+    trainName: Joi.string().required(),
 })
 
 const trainSchema = Joi.object({
@@ -62,23 +66,15 @@ const trainSchema = Joi.object({
 })
 
 const trainStationsSchema = Joi.object({
-    name: Joi.string().required().messages({
-        'string.base': 'invalid type',
-        'string.epmty': `Station's name is required`,
-    }),
-    open_hour: Joi.string().required().messages({
-        'string.base': 'invalid type',
-        'string.epmty': `opening hour is required`,
-    }),
-    close_hour: Joi.string().required().messages({
-        'string.base': 'invalid type',
-        'string.epmty': `closure hour is required`,
-    }),
+    name: Joi.string().required(),
+    open_hour: Joi.string().required(),
+    close_hour: Joi.string().required(),
     image: Joi.any()
 })
 
 exports.validateRegister = validator(registerSchema);
 exports.validateLogin = validator(loginSchema);
-exports.validateTicket = validator(ticketSchema);
+exports.validateTicketBook = validator(ticketBookSchema);
+exports.validateTicketValidate = validator(ticketValidateSchema);
 exports.validateTrain = validator(trainSchema);
 exports.validateTrainStations = validator(trainStationsSchema);

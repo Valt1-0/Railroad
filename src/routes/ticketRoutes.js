@@ -7,7 +7,8 @@ const Train = require("../models/trainModel");
 
 const isAuth = require("../middleware/isAuth");
 const isAdmin = require("../middleware/isAdmin");
-const { validateTicket } = require("../middleware/validator");
+const { validateTicketBook } = require("../middleware/validator");
+const { validateTicketValidate } = require("../middleware/validator");
 
 router
   .get("/find",
@@ -28,6 +29,16 @@ router
     async (req, res) => {
 
     try {
+
+      // Joi Validation
+      const { error, value } = validateTicketBookO(req.body);
+
+      if (error) {
+        console.log(error);
+        return res.send(error.details);
+      }
+
+
       // Récupérez les informations de réservation envoyées dans la requête
       const { userEmail, trainName } = req.body;
 
@@ -59,7 +70,7 @@ router
   async (req, res) => {
 
     // Joi Validation
-    const { error, value } = validateTicket(req.body);
+    const { error, value } = validateTicketValidate(req.body);
 
     if (error) {
       console.log(error);
