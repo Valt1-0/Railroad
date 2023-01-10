@@ -56,9 +56,10 @@ Get the postman export file in **requetes_postman** folder and import it into yo
 
 ![Madewith][Madewith]
 
+![Statchart][Statchart]
 
 
-https://starchart.cc/Valt1-0/Railroad.svg
+
 
 
 [Node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
@@ -80,3 +81,5 @@ https://starchart.cc/Valt1-0/Railroad.svg
 [Chai-url]: https://www.chaijs.com/
 
 [Madewith]:http://ForTheBadge.com/images/badges/built-with-love.svg
+
+[Statchart]:https://starchart.cc/Valt1-0/Railroad.svg
