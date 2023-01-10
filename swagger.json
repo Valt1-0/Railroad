@@ -135,7 +135,15 @@
             "schema": {
               "type": "integer"
             },
-            "example": "50"
+            "example": "10"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "time_of_departure"
           }
         ],
         "responses": {
@@ -202,6 +210,21 @@
           "Trains"
         ],
         "summary": "Delete Train",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "R2D2"
+                  }
+                }
+              }
+            }
+          }
+        },
         "security": [
           {
             "bearerAuth": []
@@ -223,9 +246,15 @@
           "Trains"
         ],
         "summary": "Update Train",
-        "requestBody": {
-          "content": {}
-        },
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -311,6 +340,21 @@
           "TrainStations"
         ],
         "summary": "Delete TrainStation",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Caen"
+                  }
+                }
+              }
+            }
+          }
+        },
         "security": [
           {
             "bearerAuth": []
@@ -341,6 +385,14 @@
                   "name": {
                     "type": "string",
                     "example": "SDFStationCaen"
+                  },
+                  "open_hour": {
+                    "type": "string",
+                    "example": "07:29"
+                  },
+                  "close_hour": {
+                    "type": "string",
+                    "example": "23:02"
                   }
                 }
               }
@@ -409,6 +461,21 @@
           "Users"
         ],
         "summary": "Delete User",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "test@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
         "security": [
           {
             "bearerAuth": []
