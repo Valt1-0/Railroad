@@ -14,6 +14,7 @@ isAuth = async (req, res, next) => {
       const user = await User.findById(jwt_token.id);
 
      console.log(jwt_token);
+     console.log(user);
 
       if (!user) {
         return res.status(403).send("You dont have the permission");

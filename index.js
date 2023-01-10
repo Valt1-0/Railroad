@@ -33,7 +33,7 @@ db.on("error", (error) => {console.error(error);});
 const app = express();
 
 app.use(cors())
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.json( { type: 'application/json'}));
 
