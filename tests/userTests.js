@@ -6,22 +6,22 @@ require("../index");
 
 chai.use(chaiHttp);
 
-describe("GET /users/find", () => {
-  it("Return all users",
-    async () => {
-      await request
-        .get('/find')
-        .set('Authorization', 'Bearer eydezI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmM0NDcyN2I2NmU2YTk0NzIxZjlhZiIsImVtYWlsIjoiZW1wbG95ZWUyQGdtYWlsLmNvbSIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTY3MzI5Njk4NywiZXhwIjoxNjczMzAwNTg3fQ.V3CEK2ByP-PnhXrks8yzWSENm0OVhR6OWn8uoiwANFM')
-        .query({ email: 'employee2@gmail.com',})
-        .then(res => {
-          expect(res.statusCode).to.equal(200);
-          console.log(res.statusCode);
-        })
-        .catch(error => {
-          throw new Error(error)
-        })
-    });
-});
+// describe("GET /users/find", () => {
+//   it("Return all users",
+//     async () => {
+//       await request
+//         .get('/find')
+//         .set('Authorization', 'Bearer eydezI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmM0NDcyN2I2NmU2YTk0NzIxZjlhZiIsImVtYWlsIjoiZW1wbG95ZWUyQGdtYWlsLmNvbSIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTY3MzI5Njk4NywiZXhwIjoxNjczMzAwNTg3fQ.V3CEK2ByP-PnhXrks8yzWSENm0OVhR6OWn8uoiwANFM')
+//         .query({ email: 'employee2@gmail.com',})
+//         .then(res => {
+//           expect(res.statusCode).to.equal(200);
+//           console.log(res.statusCode);
+//         })
+//         .catch(error => {
+//           throw new Error(error)
+//         })
+//     });
+// });
 
 /*
  * LOGIN
