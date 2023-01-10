@@ -80,17 +80,37 @@ chai.use(chaiHttp);
  * UPDATE
  */
 
-//a faire quand update user est valide
-  // describe("PUT /users/update", () => {
-  //   it("it should update a user",
-  //   async () => {
-  //     await request
-  //         .put("/update")
+// a faire quand update user est valide
+//   describe("PUT /users/update", () => {
+//     it("it should update a user",
+//     async () => {
+//       await request
+//           .put("/update")
+//           .send({
+//             pseudo: "guillaume1"
+//           })
+//           .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMwYzRkMDVlZDgyMGM5OWU5MmVkMyIsImVtYWlsIjoiYWRtaW4xQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzMwNjI5MywiZXhwIjoxNjczMzA5ODkzfQ.DOMqjC8Ux4uy476yd1s0tAKVXeCfRePXIUW7yeIyul8')
+//           .query({ id: '63bc0c4d05ed820c99e92ed3',})
+//           .then(res => {
+//             expect(res.statusCode).to.equal(200);
+//             console.log(res.statusCode);
+//             console.log(res.body.token)
+//           })
+//           .catch(error => {
+//             throw new Error(error)
+//           })
+//       });
+//   });
+
+  // describe("DELETE /users/delete")
+  //   it("it should delete a user if the email is registered"), () => {
+  //     async () => {
+  //       await request
+  //         .delete("/delete")
   //         .send({
-  //           pseudo: "guillaume1"
+  //           email: "guillaume@gmail.com"
   //         })
-  //         .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMwYzRkMDVlZDgyMGM5OWU5MmVkMyIsImVtYWlsIjoiYWRtaW4xQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzMwNjI5MywiZXhwIjoxNjczMzA5ODkzfQ.DOMqjC8Ux4uy476yd1s0tAKVXeCfRePXIUW7yeIyul8')
-  //         .query({ id: '63bc0c4d05ed820c99e92ed3',})
+  //         .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMwYzRkMDVlZDgyMGM5OWU5MmVkMyIsImVtYWlsIjoiYWRtaW4xQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzMwOTk2MywiZXhwIjoxNjczMzEzNTYzfQ.ePXLm7_3eLG8zo4ec4dwHGevYHUy417nAq8Hpz6G_8M')
   //         .then(res => {
   //           expect(res.statusCode).to.equal(200);
   //           console.log(res.statusCode);
@@ -99,14 +119,25 @@ chai.use(chaiHttp);
   //         .catch(error => {
   //           throw new Error(error)
   //         })
-  //     });
-  // });
+  //     };
+  // };
 
-  describe("DELETE /users/delete")
-    it("it should delete a user"), () => {
-      async () => {
-        await request
-          .delete("/delete")
-          .send({})
-      }
-    }
+  describe("DELETE /users/delete", () => {
+    it("it should delete a user if the email is registered", async () => {
+      await request
+        .delete("/delete")
+        .send({
+          email: "admin1@gmail.com"
+        })
+        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMwYzRkMDVlZDgyMGM5OWU5MmVkMyIsImVtYWlsIjoiYWRtaW4xQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzM1NDI2MCwiZXhwIjoxNjczMzU3ODYwfQ.NjFd_iKmMUgNOh-Nx-rdKRVx7QdxLGa6B2HWO58NRHE')
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          console.log(res.statusCode);
+          console.log(res.body.token)
+        })
+        .catch(error => {
+          throw new Error(error)
+        });
+    });
+  });
+  
