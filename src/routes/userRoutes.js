@@ -114,7 +114,7 @@ router
         if (err) {
           res.status(500).send(err);
         } else if (!user) {
-          res.status(401).send({ message: "E-mail ou mot de passe incorrect" });
+          res.status(401).send({ message: "Incorrect email or password" });
         } else {
           // Vérifiez si le mot de passe envoyé dans la requête correspond au mot de passe hashé de l'utilisateur
           bcrypt.compare(req.body.password, user.password, (err, result) => {
@@ -123,7 +123,7 @@ router
             } else if (!result) {
               res
                 .status(401)
-                .send({ message: "E-mail ou mot de passe incorrect" });
+                .send({ message: "Incorrect email or password" });
             } else {
               // Générez un jeton JWT pour l'utilisateur
               const token = jwt.sign(
@@ -155,7 +155,7 @@ router
         } else if (user) {
           res
             .status(400)
-            .send({ message: "Cette adresse e-mail est déjà utilisée" });
+            .send({ message: "This email address is already in use" });
         } else {
           // Hash le mot de passe de l'utilisateur
           bcrypt.hash(req.body.password, 10, (err, hash) => {

@@ -18,6 +18,22 @@
     }
   },
   "paths": {
+    "/tickets/find": {
+      "get": {
+        "tags": [
+          "Tickets"
+        ],
+        "summary": "Find Tickets",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
     "/tickets/book": {
       "post": {
         "tags": [
@@ -96,22 +112,6 @@
             "example": "63b9b747c7eeb5682e9ab47c"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/tickets/find": {
-      "get": {
-        "tags": [
-          "Tickets"
-        ],
-        "summary": "Find Tickets",
         "responses": {
           "200": {
             "description": "Successful response",
