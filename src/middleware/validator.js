@@ -37,38 +37,59 @@ const loginSchema = Joi.object({
 })
 
 const ticketValidateSchema = Joi.object({
-    start_station: Joi.string().required(),
-    end_station: Joi.string().required(),
+    start_station: Joi.string().required().messages({
+        'string.base': 'invalid type',
+        'string.empty': `start station's name is required`,
+    }),
+    end_station: Joi.string().required().messages({
+        'string.base': 'invalid type',
+        'string.empty': `end station's name is required`,
+    }),
 })
 
 const ticketBookSchema = Joi.object({
-    userEmail: Joi.string().required(),
-    trainName: Joi.string().required(),
+    userEmail: Joi.string().required().messages({
+        'string.base': 'invalid type',
+        'string.empty': 'email is required',
+    }),
+    trainName: Joi.string().required().messages({
+        'string.base': 'invalid type',
+        'string.empty': `train's name is required`,
+    }),
 })
 
 const trainSchema = Joi.object({
     name: Joi.string().required().messages({
         'string.base': 'invalid type',
-        'string.epmty': `train's name is required`,
+        'string.empty': `train's name is required`,
     }),
     start_station: Joi.string().required().messages({
         'string.base': 'invalid type',
-        'string.epmty': `station's name is required`,
+        'string.empty': `station's name is required`,
     }),
     end_station: Joi.string().required().messages({
         'string.base': 'invalid type',
-        'string.epmty': `station's name is required`,
+        'string.empty': `station's name is required`,
     }),
     time_of_departure: Joi.string().required().messages({
         'string.base': 'invalid type',
-        'string.epmty': `time is required`,
+        'string.empty': `time is required`,
     }),
 })
 
 const trainStationsSchema = Joi.object({
-    name: Joi.string().required(),
-    open_hour: Joi.string().required(),
-    close_hour: Joi.string().required(),
+    name: Joi.string().required().messages({
+        'string.base': 'invalid type',
+        'string.empty': `train station's name is required`,
+    }),
+    open_hour: Joi.string().required().messages({
+        'string.base': 'invalid type',
+        'string.empty': `time is required`,
+    }),
+    close_hour: Joi.string().required().messages({
+        'string.base': 'invalid type',
+        'string.empty': `time is required`,
+    }),
     image: Joi.any()
 })
 
