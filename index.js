@@ -33,7 +33,7 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/trains', trainRoutes);
 app.use('/trainstations', trainStationRoutes);
-app.use('/ticket', ticketRoutes);
+app.use('/tickets', ticketRoutes);
 
 
 app.listen(PORT, () => {
