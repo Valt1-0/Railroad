@@ -43,11 +43,11 @@ app.use('/trainstations', trainStationRoutes);
 app.use('/tickets', ticketRoutes);
 
 const swaggerUi = require('swagger-ui-express'),
-  swaggerDocument = require('./tickets.json');
+  swaggerDocument = require('./swagger.json');
 
-app.use('/swagger-tickets',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/swagger',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(PORT, () => {
   console.log(chalk.magenta(`Listening on port :`, chalk.yellow(PORT) ));
-  console.log(chalk.cyan('Tickets Swagger on :', chalk.yellow.underline('http://localhost:3000/swagger-tickets')));
+  console.log(chalk.cyan('Swagger on :', chalk.yellow.underline('http://localhost:3000/swagger')));
 });

@@ -6,22 +6,22 @@ require("../index");
 
 chai.use(chaiHttp);
 
-// describe("GET /users/find", () => {
-//   it("Return all users",
-//     async () => {
-//       await request
-//         .get('/find')
-//         .set('Authorization', 'Bearer eydezI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmM0NDcyN2I2NmU2YTk0NzIxZjlhZiIsImVtYWlsIjoiZW1wbG95ZWUyQGdtYWlsLmNvbSIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTY3MzI5Njk4NywiZXhwIjoxNjczMzAwNTg3fQ.V3CEK2ByP-PnhXrks8yzWSENm0OVhR6OWn8uoiwANFM')
-//         .query({ email: 'employee2@gmail.com',})
-//         .then(res => {
-//           expect(res.statusCode).to.equal(200);
-//           console.log(res.statusCode);
-//         })
-//         .catch(error => {
-//           throw new Error(error)
-//         })
-//     });
-// });
+describe("GET /users/find", () => {
+  it("Return all users",
+    async () => {
+      await request
+        .get('/find')
+        .set('Authorization', 'Bearer eydezI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmM0NDcyN2I2NmU2YTk0NzIxZjlhZiIsImVtYWlsIjoiZW1wbG95ZWUyQGdtYWlsLmNvbSIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTY3MzI5Njk4NywiZXhwIjoxNjczMzAwNTg3fQ.V3CEK2ByP-PnhXrks8yzWSENm0OVhR6OWn8uoiwANFM')
+        .query({ email: 'employee2@gmail.com',})
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          console.log(res.statusCode);
+        })
+        .catch(error => {
+          throw new Error(error)
+        })
+    });
+});
 
 /*
  * LOGIN
@@ -79,7 +79,6 @@ chai.use(chaiHttp);
   ! a faire quand update user est valide
  */
 
-<<<<<<< HEAD
   // describe("PUT /users/update", () => {
   //   it("it should update a user",
   //   async () => {
@@ -87,7 +86,6 @@ chai.use(chaiHttp);
   //         .put("/update")
   //         .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMwYzRkMDVlZDgyMGM5OWU5MmVkMyIsImVtYWlsIjoiYWRtaW4xQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzMwNjI5MywiZXhwIjoxNjczMzA5ODkzfQ.DOMqjC8Ux4uy476yd1s0tAKVXeCfRePXIUW7yeIyul8')
   //         .query({ id: '63bc0c4d05ed820c99e92ed3',})
-=======
 // a faire quand update user est valide
 //   describe("PUT /users/update", () => {
 //     it("it should update a user",
@@ -115,14 +113,10 @@ chai.use(chaiHttp);
   //     async () => {
   //       await request
   //         .delete("/delete")
->>>>>>> 95fc5d86bc845bcc8f93a772b16386fb8cabda33
   //         .send({
   //           email: "guillaume@gmail.com"
   //         })
-<<<<<<< HEAD
-=======
   //         .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMwYzRkMDVlZDgyMGM5OWU5MmVkMyIsImVtYWlsIjoiYWRtaW4xQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzMwOTk2MywiZXhwIjoxNjczMzEzNTYzfQ.ePXLm7_3eLG8zo4ec4dwHGevYHUy417nAq8Hpz6G_8M')
->>>>>>> 95fc5d86bc845bcc8f93a772b16386fb8cabda33
   //         .then(res => {
   //           expect(res.statusCode).to.equal(200);
   //           console.log(res.statusCode);
@@ -134,47 +128,43 @@ chai.use(chaiHttp);
   //     };
   // };
 
-<<<<<<< HEAD
 
 
 /*
  * DELETE par l'Email
  */
 
-describe("DELETE /users/delete", () => {
-  it("Delete an user",
-  async () => {
-    await request
-        .delete("/delete")
-        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmQzZDgxNTlhNTM4ZTRhYmE4YjIwZSIsImVtYWlsIjoid2lsbHlhQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzM1MTkwMCwiZXhwIjoxNjczMzU1NTAwfQ.O3ko75UMoUd5T1rhZyVtgQPeWw9CG9PCkS15sN4gC5U')
-        .send({email: "willya@gmail.com"})
-        .then(res => {
-          expect(res.statusCode).to.equal(200);
-          console.log(res.statusCode);
-        })
-        .catch(error => {
-          throw new Error(error)
-        })
-    });
-});
-=======
-  describe("DELETE /users/delete", () => {
-    it("it should delete a user if the email is registered", async () => {
-      await request
-        .delete("/delete")
-        .send({
-          email: "admin1@gmail.com"
-        })
-        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMwYzRkMDVlZDgyMGM5OWU5MmVkMyIsImVtYWlsIjoiYWRtaW4xQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzM1NDI2MCwiZXhwIjoxNjczMzU3ODYwfQ.NjFd_iKmMUgNOh-Nx-rdKRVx7QdxLGa6B2HWO58NRHE')
-        .then(res => {
-          expect(res.statusCode).to.equal(200);
-          console.log(res.statusCode);
-          console.log(res.body.token)
-        })
-        .catch(error => {
-          throw new Error(error)
-        });
-    });
-  });
-  
->>>>>>> 95fc5d86bc845bcc8f93a772b16386fb8cabda33
+// describe("DELETE /users/delete", () => {
+//   it("Delete an user",
+//   async () => {
+//     await request
+//         .delete("/delete")
+//         .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmQzZDgxNTlhNTM4ZTRhYmE4YjIwZSIsImVtYWlsIjoid2lsbHlhQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzM1MTkwMCwiZXhwIjoxNjczMzU1NTAwfQ.O3ko75UMoUd5T1rhZyVtgQPeWw9CG9PCkS15sN4gC5U')
+//         .send({email: "willya@gmail.com"})
+//         .then(res => {
+//           expect(res.statusCode).to.equal(200);
+//           console.log(res.statusCode);
+//         })
+//         .catch(error => {
+//           throw new Error(error)
+//         })
+//     });
+// });
+//   describe("DELETE /users/delete", () => {
+//     it("it should delete a user if the email is registered", async () => {
+//       await request
+//         .delete("/delete")
+//         .send({
+//           email: "admin1@gmail.com"
+//         })
+//         .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMwYzRkMDVlZDgyMGM5OWU5MmVkMyIsImVtYWlsIjoiYWRtaW4xQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzM1NDI2MCwiZXhwIjoxNjczMzU3ODYwfQ.NjFd_iKmMUgNOh-Nx-rdKRVx7QdxLGa6B2HWO58NRHE')
+//         .then(res => {
+//           expect(res.statusCode).to.equal(200);
+//           console.log(res.statusCode);
+//           console.log(res.body.token)
+//         })
+//         .catch(error => {
+//           throw new Error(error)
+//         });
+//     });
+//   });

@@ -13,8 +13,7 @@ const { validateRegister } = require("../middleware/validator");
 
 
 router
-  .get(
-    "/find",isAuth,
+  .get("/find",isAuth,
 
     async (req, res) => {
 
