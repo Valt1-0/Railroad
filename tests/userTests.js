@@ -6,13 +6,16 @@ require("../index");
 
 chai.use(chaiHttp);
 
+/*
+ * Liste les informations mise en paramètres
+ */
+
 describe("GET /users/find", () => {
   it("Return all users",
     async () => {
       await request
         .get('/find')
-        .set('Authorization', 'Bearer eydezI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmM0NDcyN2I2NmU2YTk0NzIxZjlhZiIsImVtYWlsIjoiZW1wbG95ZWUyQGdtYWlsLmNvbSIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTY3MzI5Njk4NywiZXhwIjoxNjczMzAwNTg3fQ.V3CEK2ByP-PnhXrks8yzWSENm0OVhR6OWn8uoiwANFM')
-        .query({ email: 'employee2@gmail.com',})
+        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmRhNDVjYzIyMTIxYzJmNWE3N2ZjZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjczMzcyNzY0LCJleHAiOjE2NzMzNzYzNjR9.-k9tfEpxu5mVM0QpfnUAMqewyIZXesmGAHBH7MAkBUE')
         .then(res => {
           expect(res.statusCode).to.equal(200);
           console.log(res.statusCode);

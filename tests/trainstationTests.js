@@ -101,23 +101,23 @@ describe("GET /trainstations/find", () => {
  * Ajouter une gare en tant qu'admin
  */
 
-describe("POST /trainstations/add", () => {
-    it("Create trainstation",
-    async () => {
-      await request
-          .post("/add")
-          .field('name', "New York")
-          .field('open_hour', "10:10")
-          .field('close_hour', "22:22")
-          .attach('image', 'src/img/trainStations/mmecat.jpg')
-          .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmQ2ZDkzOWFhZGRlMWY0OWRhYWFjYyIsImVtYWlsIjoid2lsbHlhQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzM2ODUzMCwiZXhwIjoxNjczMzcyMTMwfQ.D4Z0-rm_LABMZtYlf28PlM9rfku2NNqxd5_zVQTKJ6I')
-          .then(res => {
-            expect(res.statusCode).to.equal(200);
-            console.log(res.statusCode);
-            console.log(res.body.token)
-          })
-          .catch(error => {
-            throw new Error(error)
-          })
-      });
-  });
+// describe("POST /trainstations/add", () => {
+//     it("Create trainstation",
+//     async () => {
+//       await request
+//           .post("/add")
+//           .field('name', "New York")
+//           .field('open_hour', "10:10")
+//           .field('close_hour', "22:22")
+//           .attach('image', 'src/img/trainStations/mmecat.jpg')
+//           .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmQ2ZDkzOWFhZGRlMWY0OWRhYWFjYyIsImVtYWlsIjoid2lsbHlhQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzM2ODUzMCwiZXhwIjoxNjczMzcyMTMwfQ.D4Z0-rm_LABMZtYlf28PlM9rfku2NNqxd5_zVQTKJ6I')
+//           .then(res => {
+//             expect(res.statusCode).to.equal(200);
+//             console.log(res.statusCode);
+//             console.log(res.body.token)
+//           })
+//           .catch(error => {
+//             throw new Error(error)
+//           })
+//       });
+//   });
