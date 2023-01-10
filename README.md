@@ -71,5 +71,7 @@ Get the postman export file in **requetes_postman** folder and import it into yo
 [Mocha]: https://img.shields.io/badge/mocha.js-323330?style=for-the-badge&logo=mocha&logoColor=Brown
 [Mocha-url]: https://mochajs.org/
 
-[Madewith]:http://ForTheBadge.com/images/badges/built-with-love.svg
+[Chai]: https://img.shields.io/badge/chai.js-323330?style=for-the-badge&logo=chai&logoColor=red
+[Chai-url]: https://www.chaijs.com/
 
+[Madewith]:http://ForTheBadge.com/images/badges/built-with-love.svg
