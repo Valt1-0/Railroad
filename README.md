@@ -33,9 +33,9 @@ Il permet également aux gens de "réserver" un billet d'un arrêt à un autre e
 git clone https://github.com/Valt1-0/Railroad.git
 ```
 
-## 2. Install NPM packages.
+## 2. Install Dependencies.
 ```
-npm install
+npm install | npm i
 ```
 
 ## 3. Change your "MONGODB_URI" path.
@@ -50,7 +50,7 @@ npm run start
 Get the postman export file in **requetes_postman** folder and import it into your workspace
 
 
-<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+[![Madewith][Madewith]
 
 
 [Node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
@@ -68,4 +68,5 @@ Get the postman export file in **requetes_postman** folder and import it into yo
 [Mocha]: https://img.shields.io/badge/mocha.js-323330?style=for-the-badge&logo=mocha&logoColor=Brown
 [Mocha-url]: https://mochajs.org/
 
-http://ForTheBadge.com/images/badges/built-with-love.svg
+[Madewith]:http://ForTheBadge.com/images/badges/built-with-love.svg
+
