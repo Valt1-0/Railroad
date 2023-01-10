@@ -76,28 +76,19 @@ router
         const paramsId = req.query._id;
         const userId = req.user._id;
 
+        // vérification de la connexion de l'utilisateur
+        if (!req.user) return res.status(401).send({ error: 'Not authenticated' });
+
         console.log(userId);
         console.log(paramsId);
         console.log(userId == paramsId)
 
-        // vérification de la connexion de l'utilisateur
-        if (!req.user) return res.status(401).send({ error: 'Not authenticated' });
-
-        if (paramsId != undefined)
-        {
-          const paramsId = mongoose.Types.ObjectId(req.query._id);
-
-          console.log(userId);
-          console.log(paramsId);
-          console.log(userId == paramsId)
-
+        if (paramsId == undefined) {
           if (( paramsId != userId && req.user.role != "Admin" ))
             return res.status(403).send("You dont have the permission")
           else
             userId = paramsId
-
         }
-
         const user = await User.findByIdAndUpdate(req.query._id, {...req.body,});
         res.status(200).send(user);
 

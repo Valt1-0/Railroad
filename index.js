@@ -4,6 +4,11 @@ const dbConnect = require('./config/connectMongo')
 const express = require("express");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
+const bodyParser = require('body-parser');
+const cors = require('cors')
+
+
+
 const userRoutes = require("./src/routes/userRoutes")
 const trainRoutes = require("./src/routes/trainRoutes")
 const trainStationRoutes = require("./src/routes/trainstationRoutes")
@@ -17,7 +22,7 @@ dbConnect.connect();
 
 const db = mongoose.connection;
 
-db.once("open", () => { console.log(chalk.green("Connected at", chalk.blue(db.name))); });
+db.once("open", () => { console.log(chalk.green("MongoDB Database Connected at", chalk.blue(db.name))); });
 db.on("error", (error) => {console.error(error);});
 
 
@@ -27,15 +32,22 @@ db.on("error", (error) => {console.error(error);});
 
 const app = express();
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.json( { type: 'application/json'}));
 
 app.use('/users', userRoutes);
 app.use('/trains', trainRoutes);
 app.use('/trainstations', trainStationRoutes);
 app.use('/tickets', ticketRoutes);
 
+const swaggerUi = require('swagger-ui-express'),
+  swaggerDocument = require('./tickets.json');
+
+app.use('/swagger-tickets',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(PORT, () => {
   console.log(chalk.magenta(`Listening on port :`, chalk.yellow(PORT) ));
+  console.log(chalk.cyan('Tickets Swagger on :', chalk.yellow.underline('http://localhost:3000/swagger-tickets')));
 });

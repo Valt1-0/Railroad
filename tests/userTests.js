@@ -2,8 +2,6 @@ const request = require("supertest")("http://localhost:3000/users");
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiHttp = require('chai-http');
-const { string } = require("joi");
-const { Admin } = require("mongodb");
 require("../index");
 
 chai.use(chaiHttp);
@@ -78,19 +76,19 @@ chai.use(chaiHttp);
 
 /*
  * UPDATE
+  ! a faire quand update user est valide
  */
 
-//a faire quand update user est valide
   // describe("PUT /users/update", () => {
   //   it("it should update a user",
   //   async () => {
   //     await request
   //         .put("/update")
+  //         .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMwYzRkMDVlZDgyMGM5OWU5MmVkMyIsImVtYWlsIjoiYWRtaW4xQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzMwNjI5MywiZXhwIjoxNjczMzA5ODkzfQ.DOMqjC8Ux4uy476yd1s0tAKVXeCfRePXIUW7yeIyul8')
+  //         .query({ id: '63bc0c4d05ed820c99e92ed3',})
   //         .send({
   //           pseudo: "guillaume1"
   //         })
-  //         .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmMwYzRkMDVlZDgyMGM5OWU5MmVkMyIsImVtYWlsIjoiYWRtaW4xQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzMwNjI5MywiZXhwIjoxNjczMzA5ODkzfQ.DOMqjC8Ux4uy476yd1s0tAKVXeCfRePXIUW7yeIyul8')
-  //         .query({ id: '63bc0c4d05ed820c99e92ed3',})
   //         .then(res => {
   //           expect(res.statusCode).to.equal(200);
   //           console.log(res.statusCode);
@@ -102,11 +100,25 @@ chai.use(chaiHttp);
   //     });
   // });
 
-  describe("DELETE /users/delete")
-    it("it should delete a user"), () => {
-      async () => {
-        await request
-          .delete("/delete")
-          .send({})
-      }
-    }
+
+
+/*
+ * DELETE par l'Email
+ */
+
+describe("DELETE /users/delete", () => {
+  it("Delete an user",
+  async () => {
+    await request
+        .delete("/delete")
+        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmQzZDgxNTlhNTM4ZTRhYmE4YjIwZSIsImVtYWlsIjoid2lsbHlhQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY3MzM1MTkwMCwiZXhwIjoxNjczMzU1NTAwfQ.O3ko75UMoUd5T1rhZyVtgQPeWw9CG9PCkS15sN4gC5U')
+        .send({email: "willya@gmail.com"})
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          console.log(res.statusCode);
+        })
+        .catch(error => {
+          throw new Error(error)
+        })
+    });
+});

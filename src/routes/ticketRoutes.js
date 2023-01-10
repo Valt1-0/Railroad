@@ -29,9 +29,10 @@ router
     async (req, res) => {
 
     try {
-
+      const { userEmail, trainName } = req.body;
+      console.log(req.body);
       // Joi Validation
-      const { error, value } = validateTicketBookO(req.body);
+      const { error, value } = validateTicketBook({userEmail: req.body.userEmail, trainName: req.body.trainName});
 
       if (error) {
         console.log(error);
@@ -40,9 +41,13 @@ router
 
 
       // Récupérez les informations de réservation envoyées dans la requête
-      const { userEmail, trainName } = req.body;
 
       console.log(userEmail + " " + trainName);
+
+      // let user = await User.findOne({ email: userEmail });
+      // if (!user) {
+      //   return res.status(404).send({ error: "L'utilisateur n'existe pas" });
+      // }
 
       // Récupérez les informations du train correspondant à l'identifiant de train envoyé dans la requête
       let train = await Train.findOne({ name: trainName });
