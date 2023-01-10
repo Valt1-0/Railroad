@@ -47,8 +47,18 @@ Generate a MongoDB Atlas database and paste it in the **.env**
 npm run start
 ```
 
-# Postman :
-Get the postman export file in **requetes_postman** folder and import it into your workspace
+# Requètes :
+
+## Postman :
+
+Get the postman export file in **requetes_postman** folder and import it into your postman workspace
+
+## Or
+
+
+## Swagger :
+
+You can go to **http:localhost:3000/swagger** after run the project
 
 <br/>
 <br/>
@@ -56,7 +66,6 @@ Get the postman export file in **requetes_postman** folder and import it into yo
 
 ![Madewith][Madewith]
 
-![Statchart][Statchart]
 
 
 
@@ -81,7 +90,3 @@ Get the postman export file in **requetes_postman** folder and import it into yo
 [Chai-url]: https://www.chaijs.com/
 
 [Madewith]:http://ForTheBadge.com/images/badges/built-with-love.svg
-
-[Railroad]: https://github.com/Valt1-0/Railroad.git
-
-[Statchart]:https://starchart.cc/Valt1-0/[Railroad].svg
