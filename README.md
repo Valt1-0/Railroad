@@ -25,6 +25,7 @@ Il permet également aux gens de "réserver" un billet d'un arrêt à un autre e
 * [![ExpressJS][Express]][Express-url]
 * [![MongoDB][MongoDB]][MongoDB-url]
 * [![JWT][JWT]][JWT-url]
+* [![Mocha][Mocha]][Mocha-url]
 
 # Installation :
 ## 1. Clone the repository.
@@ -64,11 +65,7 @@ Get the postman export file in **requetes_postman** folder and import it into yo
 [JWT]:https://img.shields.io/badge/json%20web%20tokens-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink
 [JWT-url]: https://jwt.io/introduction
 
-
-https://img.shields.io/badge/mocha.js-323330?style=for-the-badge&logo=mocha&logoColor=Brown
-
-
-
-https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
+[Mocha]: https://img.shields.io/badge/mocha.js-323330?style=for-the-badge&logo=mocha&logoColor=Brown
+[Mocha-url]: https://mochajs.org/
 
 http://ForTheBadge.com/images/badges/built-with-love.svg
