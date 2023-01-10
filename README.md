@@ -58,7 +58,7 @@ Get the postman export file in **requetes_postman** folder and import it into yo
 
 ## Swagger :
 
-You can go to **http:localhost:3000/swagger** after run the project
+You can go to **[http://localhost:3000/swagger]** after run the project
 
 <br/>
 <br/>
