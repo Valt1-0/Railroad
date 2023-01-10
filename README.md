@@ -26,6 +26,7 @@ Il permet également aux gens de "réserver" un billet d'un arrêt à un autre e
 * [![MongoDB][MongoDB]][MongoDB-url]
 * [![JWT][JWT]][JWT-url]
 * [![Mocha][Mocha]][Mocha-url]
+* [![Chai][Chai]][Chai-url]
 
 # Installation :
 ## 1. Clone the repository.
