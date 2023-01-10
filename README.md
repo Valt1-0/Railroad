@@ -82,4 +82,6 @@ Get the postman export file in **requetes_postman** folder and import it into yo
 
 [Madewith]:http://ForTheBadge.com/images/badges/built-with-love.svg
 
-[Statchart]:https://starchart.cc/Valt1-0/[Railroad](https://github.com/Valt1-0/Railroad.git).svg
+[Railroad]: https://github.com/Valt1-0/Railroad.git
+
+[Statchart]:https://starchart.cc/Valt1-0/[Railroad].svg
